@@ -1,0 +1,166 @@
+/* ==========================================================================
+   Fábio Gustavo de Minas — Currículo Digital
+   print.css — Estilos para impressão / PDF
+   ========================================================================== */
+
+@media print {
+  /* ------------------------------------------------------------------
+     Reset de cores para fundo branco e texto escuro
+     ------------------------------------------------------------------ */
+  :root {
+    --bg:              #ffffff;
+    --bg-panel:        #ffffff;
+    --bg-panel-raised: #f5f5f5;
+    --line:            #cccccc;
+    --line-soft:       #e0e0e0;
+    --text:            #111111;
+    --text-muted:      #444444;
+    --text-dim:        #777777;
+    --accent-op:       #006b60;
+    --accent-warn:     #a0640a;
+  }
+
+  /* ------------------------------------------------------------------
+     Layout base
+     ------------------------------------------------------------------ */
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #111111 !important;
+    font-size: 11pt;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+  }
+
+  .wrap {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* ------------------------------------------------------------------
+     Terminal chrome simplificado
+     ------------------------------------------------------------------ */
+  .term {
+    box-shadow: none;
+    border: 1px solid #cccccc;
+    border-radius: 0;
+  }
+
+  .term-bar {
+    background: #f5f5f5;
+    border-bottom: 1px solid #cccccc;
+    padding: 6px 12px;
+  }
+
+  /* Ocultar os botões decorativos (dots) na impressão */
+  .dot {
+    display: none;
+  }
+
+  /* ------------------------------------------------------------------
+     Hero
+     ------------------------------------------------------------------ */
+  .hero-row {
+    gap: 16px;
+  }
+
+  .avatar-wrap::after {
+    display: none; /* Oculta o indicador LED */
+  }
+
+  h1.name {
+    font-size: 24pt;
+  }
+
+  .role {
+    font-size: 12pt;
+  }
+
+  /* ------------------------------------------------------------------
+     Ocultar elementos desnecessários na impressão
+     ------------------------------------------------------------------ */
+  .prompt-line .cursor,
+  .led {
+    animation: none !important;
+    display: none;
+  }
+
+  /* Lightbox nunca deve aparecer na impressão */
+  .lightbox {
+    display: none !important;
+  }
+
+  /* ------------------------------------------------------------------
+     Status widget
+     ------------------------------------------------------------------ */
+  .status {
+    background: #f5f5f5;
+    border: 1px solid #cccccc;
+  }
+
+  /* ------------------------------------------------------------------
+     Links: mostrar URL em textos de link
+     ------------------------------------------------------------------ */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #777777;
+  }
+
+  /* Mas não em botões de certificado */
+  .cert-link::after {
+    display: none;
+  }
+
+  /* ------------------------------------------------------------------
+     Paginação: evitar quebras indesejadas
+     ------------------------------------------------------------------ */
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .job {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Forçar quebra de página antes de seções longas, se necessário */
+  section + section {
+    page-break-before: auto;
+  }
+
+  /* ------------------------------------------------------------------
+     Cards e grids
+     ------------------------------------------------------------------ */
+  .card-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .skill-groups-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  /* ------------------------------------------------------------------
+     Footer
+     ------------------------------------------------------------------ */
+  footer {
+    border-top: 1px solid #cccccc;
+    color: #777777;
+    font-size: 9pt;
+    margin-top: 20px;
+  }
+}

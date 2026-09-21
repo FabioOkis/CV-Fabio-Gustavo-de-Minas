@@ -1,0 +1,756 @@
+/* ==========================================================================
+   Fábio Gustavo de Minas — Currículo Digital
+   style.css — Estilos principais
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Custom Properties (Design Tokens)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Cores de fundo (Azul escuro corporativo/terminal) */
+  --bg:               #0A1122;
+  --bg-panel:         #10192C;
+  --bg-panel-raised:  #16233B;
+
+  /* Bordas e Grades (Prata escuro) */
+  --line:             #2E3D52;
+  --line-soft:        #303F54;
+
+  /* Tipografia */
+  --text:             #E7ECEE;
+  --text-muted:       #8FA2B0;
+  --text-dim:         #5E7282;
+
+  /* Acento operacional (teal) */
+  --accent-op:        #4FD1C0;
+  --accent-op-dim:    #1E3A37;
+
+  /* Acento de destaque (âmbar) */
+  --accent-warn:      #E3A857;
+  --accent-warn-dim:  #4A3C24;
+
+  /* Famílias tipográficas */
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset e Base
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------------------------------
+   3. Links e Foco
+   -------------------------------------------------------------------------- */
+a {
+  color: var(--accent-op);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent-op);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   4. Layout — Wrapper
+   -------------------------------------------------------------------------- */
+.wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 20px 80px;
+}
+
+/* --------------------------------------------------------------------------
+   5. Componente: Terminal Chrome
+   -------------------------------------------------------------------------- */
+.term {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--bg-panel-raised);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Botões decorativos da barra do terminal */
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot.r { background: #5f5652; }
+.dot.y { background: #6b5a3a; }
+.dot.g { background: #3a5f52; }
+
+.term-title {
+  margin-left: 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+
+.term-body {
+  padding: 34px 30px 30px;
+}
+
+/* --------------------------------------------------------------------------
+   6. Componente: Hero (Cabeçalho / Apresentação)
+   -------------------------------------------------------------------------- */
+.hero-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+}
+
+/* Avatar com indicador de status */
+.avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 84px;
+  height: 84px;
+}
+
+.avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 2px solid var(--line);
+}
+
+/* LED de status (ponto âmbar no avatar) */
+.avatar-wrap::after {
+  content: "";
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-warn);
+  border: 2px solid var(--bg-panel);
+  box-shadow: 0 0 6px var(--accent-warn);
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Componente: Linha de Prompt
+   -------------------------------------------------------------------------- */
+.prompt-line {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.prompt-line .p {
+  color: var(--accent-op);
+}
+
+/* Cursor piscante */
+.prompt-line .cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: var(--accent-op);
+  margin-left: 2px;
+  vertical-align: -2px;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   8. Tipografia — Nome e Cargo
+   -------------------------------------------------------------------------- */
+h1.name {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 42px);
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+
+.role {
+  font-family: var(--sans);
+  font-size: 17px;
+  color: var(--text-muted);
+  margin: 0 0 22px;
+}
+
+/* --------------------------------------------------------------------------
+   9. Componente: Status Widget
+   -------------------------------------------------------------------------- */
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: var(--bg-panel-raised);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin-bottom: 26px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+}
+
+.status-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+}
+
+.status-label {
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 10.5px;
+}
+
+.status-value {
+  color: var(--text);
+}
+
+/* LED pulsante de disponibilidade */
+.led {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-warn);
+  box-shadow: 0 0 8px var(--accent-warn);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+/* --------------------------------------------------------------------------
+   10. Componente: Linha de Contato
+   -------------------------------------------------------------------------- */
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.contact-row a {
+  color: var(--text);
+}
+
+.contact-row a:hover {
+  color: var(--accent-op);
+}
+
+/* --------------------------------------------------------------------------
+   11. Componente: Seções
+   -------------------------------------------------------------------------- */
+section {
+  margin-top: 46px;
+}
+
+/* Eyebrow: título estilo comando de terminal */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent-op);
+  letter-spacing: 0.04em;
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before {
+  content: "$";
+  color: var(--text-dim);
+}
+
+.eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* Parágrafo de abertura (lede) */
+p.lede {
+  color: var(--text-muted);
+  font-size: 15.5px;
+  max-width: 62ch;
+}
+
+/* --------------------------------------------------------------------------
+   12. Componente: Grupos de Habilidades
+   -------------------------------------------------------------------------- */
+.skill-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.skill-groups-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.skill-group h3 {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 10px;
+  font-weight: 500;
+}
+
+/* Tags de habilidades */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text);
+  border: 1px solid var(--line);
+  background: var(--bg-panel-raised);
+  padding: 6px 11px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   13. Componente: Timeline de Experiência
+   -------------------------------------------------------------------------- */
+.job {
+  border-left: 2px solid var(--line);
+  padding: 2px 0 26px 22px;
+  position: relative;
+}
+
+.job:last-child {
+  padding-bottom: 4px;
+}
+
+/* Marcador de linha do tempo */
+.job::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent-op);
+}
+
+.job-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 14px;
+  margin-bottom: 6px;
+}
+
+.job-title {
+  font-size: 16.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Badge '● atual' no título do cargo em andamento */
+.job-current {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--accent-op);
+  border: 1px solid var(--accent-op-dim);
+  background: rgba(79, 209, 192, 0.08);
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: 0.03em;
+}
+
+.job-org {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.job-dates {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--text-dim);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin-left: auto;
+}
+
+  /* Cargos ocultos (histórico antigo) */
+  .job--hidden {
+    display: none;
+  }
+
+  /* Botão "Exibir tudo" */
+  .job-toggle-wrap, .cursos-toggle-wrap {
+    margin-top: 4px;
+    padding-left: 22px;
+  }
+
+  .cursos-toggle-wrap {
+    padding-left: 0;
+    grid-column: 1 / -1; /* Ocupa a largura total do grid */
+  }
+
+  .job-toggle-btn, .cursos-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--accent-op);
+    background: none;
+    border: 1px solid var(--accent-op-dim);
+    border-radius: 4px;
+    padding: 7px 14px;
+    cursor: pointer;
+    transition: background 0.18s, border-color 0.18s, color 0.18s;
+  }
+
+  .job-toggle-btn:hover, .cursos-toggle-btn:hover {
+    background: rgba(79, 209, 192, 0.08);
+    border-color: var(--accent-op);
+  }
+
+  .job-toggle-icon, .cursos-toggle-icon {
+    font-size: 10px;
+    transition: transform 0.25s;
+  }
+
+  .job-toggle-btn[aria-expanded="true"] .job-toggle-icon,
+  .cursos-toggle-btn[aria-expanded="true"] .cursos-toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .job-toggle-count, .cursos-toggle-count {
+    color: var(--text-dim);
+  }
+
+  .card--hidden {
+    display: none;
+  }
+
+.job ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.job li {
+  color: var(--text-muted);
+  font-size: 14.5px;
+  margin-bottom: 5px;
+}
+
+.job li::marker {
+  color: var(--accent-op);
+}
+
+/* --------------------------------------------------------------------------
+   14. Componente: Cards (Educação / Certificados)
+   -------------------------------------------------------------------------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid var(--line);
+  background: var(--bg-panel-raised);
+  border-radius: 6px;
+  padding: 16px 18px;
+}
+
+/* Mini-tag de ano */
+.card .tag-mini {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--accent-warn);
+  border: 1px solid var(--accent-warn-dim);
+  background: rgba(227, 168, 87, 0.08);
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-bottom: 9px;
+  letter-spacing: 0.03em;
+}
+
+.card h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.card .sub {
+  font-size: 12.5px;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  margin-bottom: 8px;
+}
+
+.card p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.card ul {
+  margin: 6px 0 0;
+  padding-left: 16px;
+}
+
+.card li {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+.card-action-links {
+  margin-top: 10px;
+  display: flex;
+  gap: 12px;
+}
+
+.card-pdf-link {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--accent-warn);
+  text-decoration: none;
+}
+
+.card-pdf-link:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   15. Componente: Botão de Certificado (abre lightbox)
+   -------------------------------------------------------------------------- */
+.cert-link {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  text-decoration-line: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 3px;
+}
+
+.cert-link:hover {
+  color: var(--accent-op);
+  text-decoration-color: var(--accent-op);
+}
+
+/* --------------------------------------------------------------------------
+   16. Componente: Lightbox de Certificados
+   -------------------------------------------------------------------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(8, 11, 13, 0.86);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox-box {
+  max-width: 920px;
+  width: 100%;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.lightbox-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--bg-panel-raised);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.lightbox-close {
+  font: inherit;
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+  border-radius: 4px;
+  padding: 3px 9px;
+  cursor: pointer;
+  font-family: var(--mono);
+}
+
+.lightbox-close:hover {
+  color: var(--text);
+  border-color: var(--accent-op);
+}
+
+.lightbox img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lightbox-note {
+  padding: 10px 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  border-top: 1px solid var(--line);
+}
+
+/* --------------------------------------------------------------------------
+   17. Footer
+   -------------------------------------------------------------------------- */
+footer {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--text-dim);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   18. Seleção de Texto
+   -------------------------------------------------------------------------- */
+::selection {
+  background: var(--accent-op-dim);
+  color: var(--text);
+}
+
+/* --------------------------------------------------------------------------
+   19. Acessibilidade — Preferências de Movimento Reduzido
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .prompt-line .cursor {
+    animation: none;
+  }
+
+  .led {
+    animation: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   20. Media Queries — Responsividade
+   -------------------------------------------------------------------------- */
+@media (max-width: 720px) {
+  .skill-groups-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .status {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 12px 14px;
+  }
+
+  .skill-groups {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-row {
+    gap: 16px;
+  }
+
+  .avatar-wrap {
+    width: 64px;
+    height: 64px;
+  }
+}

@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --bg-page: #f1f5f9;
+  --text-dark: #0f172a;
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Print Specific Rules */
+@media print {
+  @page {
+    margin: 12mm 15mm;
+    size: A4;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Force clean black typography in print */
+  h1, h2, h3, p, span, li, a {
+    color: #000000 !important;
+    text-shadow: none !important;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  hr {
+    border-color: #333333 !important;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.18s ease-out forwards;
+}
