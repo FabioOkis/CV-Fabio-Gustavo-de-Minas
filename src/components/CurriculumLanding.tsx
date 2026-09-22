@@ -358,8 +358,25 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
             </p>
 
             {/* Attachment Actions (hidden in print) */}
-            <div className="no-print flex items-center gap-2 pt-1">
-              {attachments['redes'] ? (
+            <div className="no-print flex items-center gap-3 pt-1 flex-wrap">
+              {attachments['graduacao'] && (
+                <div className="inline-flex items-center gap-2 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() => onOpenView(attachments['graduacao'])}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                  >
+                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Visualizar Diploma Graduação</span>
+                  </button>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Anexado</span>
+                  </span>
+                </div>
+              )}
+
+              {attachments['redes'] && (
                 <div className="inline-flex items-center gap-2 flex-wrap">
                   <button
                     type="button"
@@ -367,46 +384,14 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
                   >
                     <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Visualizar Diploma / Certificado</span>
+                    <span>Visualizar Diploma Pós-Graduação</span>
                   </button>
-                  {isAdmin && (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        onOpenAttach(
-                          'redes',
-                          'Graduação e Pós-Graduação em Redes — UNINOVE (2016)',
-                          'diploma'
-                        )
-                      }
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-300 hover:border-slate-400 text-xs font-medium shadow-2xs transition-all cursor-pointer active:scale-95"
-                      title="Substituir por outro arquivo"
-                    >
-                      <Upload className="w-3.5 h-3.5 text-slate-500" />
-                      <span>Substituir</span>
-                    </button>
-                  )}
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Anexado</span>
                   </span>
                 </div>
-              ) : isAdmin ? (
-                <button
-                  type="button"
-                  onClick={() =>
-                    onOpenAttach(
-                      'redes',
-                      'Graduação e Pós-Graduação em Redes — UNINOVE (2016)',
-                      'diploma'
-                    )
-                  }
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50/80 hover:bg-blue-100 text-blue-700 border border-dashed border-blue-300 hover:border-blue-400 text-xs font-semibold transition-all cursor-pointer active:scale-95"
-                >
-                  <Paperclip className="w-3.5 h-3.5 text-blue-600" />
-                  <span>Anexar Diploma (PDF ou Imagem)</span>
-                </button>
-              ) : null}
+              )}
             </div>
           </div>
         </div>
@@ -500,7 +485,7 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
               ITIL V3 Foundation — Fundação Bradesco, 2017 (fundamentos em gerenciamento estratégico de serviços de TI)
             </span>
             <div className="no-print mt-1.5">
-              {attachments['itil'] ? (
+              {attachments['itil'] && (
                 <div className="inline-flex items-center gap-2 flex-wrap">
                   <button
                     type="button"
@@ -508,45 +493,89 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
                   >
                     <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Visualizar Certificado</span>
+                    <span>Visualizar Certificado ITIL V3 (PDF)</span>
                   </button>
-                  {isAdmin && (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        onOpenAttach(
-                          'itil',
-                          'ITIL V3 Foundation — Fundação Bradesco',
-                          'certificacao'
-                        )
-                      }
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-300 hover:border-slate-400 text-xs font-medium shadow-2xs transition-all cursor-pointer active:scale-95"
-                    >
-                      <Upload className="w-3.5 h-3.5 text-slate-500" />
-                      <span>Substituir</span>
-                    </button>
-                  )}
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Anexado</span>
                   </span>
                 </div>
-              ) : isAdmin ? (
-                <button
-                  type="button"
-                  onClick={() =>
-                    onOpenAttach(
-                      'itil',
-                      'ITIL V3 Foundation — Fundação Bradesco',
-                      'certificacao'
-                    )
-                  }
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50/80 hover:bg-blue-100 text-blue-700 border border-dashed border-blue-300 hover:border-blue-400 text-xs font-semibold transition-all cursor-pointer active:scale-95"
-                >
-                  <Paperclip className="w-3.5 h-3.5 text-blue-600" />
-                  <span>Anexar Certificado ITIL V3 (PDF ou Imagem)</span>
-                </button>
-              ) : null}
+              )}
+            </div>
+          </li>
+
+          {/* ITIL 4 Foundation */}
+          <li className="list-disc list-outside ml-4 leading-normal">
+            <span>
+              Fundamentos do ITIL 4 — Green Treinamentos (gestão moderna de serviços de TI e práticas ágeis)
+            </span>
+            <div className="no-print mt-1.5">
+              {attachments['itil4'] && (
+                <div className="inline-flex items-center gap-2 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() => onOpenView(attachments['itil4'])}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                  >
+                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Visualizar Certificado ITIL 4</span>
+                  </button>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Anexado</span>
+                  </span>
+                </div>
+              )}
+            </div>
+          </li>
+
+          {/* MS-900 */}
+          <li className="list-disc list-outside ml-4 leading-normal">
+            <span>
+              Bootcamp MS-900: Microsoft 365 Fundamentals — Green Treinamentos (serviços de nuvem, segurança e conformidade M365)
+            </span>
+            <div className="no-print mt-1.5">
+              {attachments['ms900'] && (
+                <div className="inline-flex items-center gap-2 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() => onOpenView(attachments['ms900'])}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                  >
+                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Visualizar Certificado MS-900</span>
+                  </button>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Anexado</span>
+                  </span>
+                </div>
+              )}
+            </div>
+          </li>
+
+          {/* SENAI */}
+          <li className="list-disc list-outside ml-4 leading-normal">
+            <span>
+              Formação Profissional — SENAI (qualificação técnica e formação profissional)
+            </span>
+            <div className="no-print mt-1.5">
+              {attachments['senai'] && (
+                <div className="inline-flex items-center gap-2 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() => onOpenView(attachments['senai'])}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                  >
+                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Visualizar Certificado SENAI</span>
+                  </button>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Anexado</span>
+                  </span>
+                </div>
+              )}
             </div>
           </li>
 

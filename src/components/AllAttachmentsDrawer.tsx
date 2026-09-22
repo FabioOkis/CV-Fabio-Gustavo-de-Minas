@@ -60,32 +60,62 @@ export const AllAttachmentsDrawer: React.FC<AllAttachmentsDrawerProps> = ({
   const standardItems: {
     id: string;
     title: string;
-    category: 'diploma' | 'certificacao';
+    category: 'diploma' | 'certificacao' | 'curso';
     subtitle: string;
   }[] = [
     {
       id: 'mba',
       title: 'MBA em Gestão de Pessoas',
       category: 'diploma',
-      subtitle: 'UNINOVE · 2018 (Diploma / Certificado)',
+      subtitle: 'UNINOVE · 2018 (Diploma Oficial Anexado)',
     },
     {
       id: 'redes',
       title: 'Pós-Graduação em Redes de Computadores',
       category: 'diploma',
-      subtitle: 'UNINOVE · 2016 (Diploma / Certificado)',
+      subtitle: 'UNINOVE · 2016 (Diploma Oficial Anexado)',
+    },
+    {
+      id: 'graduacao',
+      title: 'Graduação em Redes de Computadores',
+      category: 'diploma',
+      subtitle: 'UNINOVE (Diploma Oficial Anexado)',
     },
     {
       id: 'hdi',
       title: 'HDI Desktop Support Technician',
       category: 'certificacao',
-      subtitle: 'HDI Brasil · 2018 (Certificação Internacional)',
+      subtitle: 'HDI Brasil · 2018 (Certificação Internacional Oficial - PDF)',
     },
     {
       id: 'itil',
       title: 'ITIL V3 Foundation',
       category: 'certificacao',
-      subtitle: 'Fundação Bradesco · 2017 (Certificação Oficial)',
+      subtitle: 'Fundação Bradesco · 2017 (Certificação Oficial - PDF)',
+    },
+    {
+      id: 'itil4',
+      title: 'Fundamentos do ITIL 4',
+      category: 'certificacao',
+      subtitle: 'Green Treinamentos (Certificado Oficial)',
+    },
+    {
+      id: 'ms900',
+      title: 'MS-900: Microsoft 365 Fundamentals',
+      category: 'certificacao',
+      subtitle: 'Green Treinamentos (Bootcamp Oficial Microsoft 365)',
+    },
+    {
+      id: 'senai',
+      title: 'Formação Profissional — SENAI',
+      category: 'curso',
+      subtitle: 'SENAI (Certificado de Formação Profissional)',
+    },
+    {
+      id: 'cert_redes',
+      title: 'Especialização em Redes de Computadores',
+      category: 'certificacao',
+      subtitle: 'Certificado de Especialização em Redes',
     },
   ];
 
