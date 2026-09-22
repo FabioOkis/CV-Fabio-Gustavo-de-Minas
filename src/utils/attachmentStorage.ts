@@ -10,7 +10,7 @@ export interface AttachmentItem {
   isDefault?: boolean;
 }
 
-const STORAGE_KEY = 'fabio_cv_attachments_v2';
+const STORAGE_KEY = 'fabio_cv_attachments_v4';
 
 // ─── PIN de administrador ────────────────────────────────────────────────────
 // Mude este valor para definir seu PIN pessoal de acesso.
@@ -18,6 +18,27 @@ const ADMIN_PIN = '1412';
 
 export function checkAdminPin(pin: string): boolean {
   return pin === ADMIN_PIN;
+}
+
+/**
+ * Resolves attachment URLs relative to the current site base path.
+ * Essential for GitHub Pages where the site is hosted under /repository-name/
+ */
+export function resolveAttachmentUrl(url: string): string {
+  if (!url) return '';
+  if (
+    url.startsWith('data:') ||
+    url.startsWith('blob:') ||
+    url.startsWith('http://') ||
+    url.startsWith('https://')
+  ) {
+    return url;
+  }
+  // Strip leading slash if any
+  const cleanPath = url.startsWith('/') ? url.slice(1) : url;
+  const rawBase = import.meta.env.BASE_URL || './';
+  const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+  return `${base}${cleanPath}`;
 }
 
 // ─── Anexos padrão fixos (sempre visíveis para todos) ───────────────────────
@@ -29,7 +50,7 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     fileName: 'Diploma MBA em Gestão de Pessoas.jpeg',
     fileType: 'image',
     fileSize: '137 KB',
-    dataUrl: '/documentos/diplomas/Diploma%20MBA%20em%20Gest%C3%A3o%20de%20Pessoas.jpeg',
+    dataUrl: 'documentos/diplomas/diploma-mba.jpeg',
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
@@ -40,7 +61,7 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     fileName: 'Diploma Pós em Redes de computadores.jpeg',
     fileType: 'image',
     fileSize: '135 KB',
-    dataUrl: '/documentos/diplomas/Diploma%20P%C3%B3s%20em%20Redes%20de%20computadores.jpeg',
+    dataUrl: 'documentos/diplomas/diploma-pos-redes.jpeg',
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
@@ -51,7 +72,7 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     fileName: 'Diploma graduação.jpeg',
     fileType: 'image',
     fileSize: '167 KB',
-    dataUrl: '/documentos/diplomas/Diploma%20gradua%C3%A7%C3%A3o.jpeg',
+    dataUrl: 'documentos/diplomas/diploma-graduacao.jpeg',
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
@@ -62,7 +83,7 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     fileName: 'Certificação HDI-DST.pdf',
     fileType: 'pdf',
     fileSize: '255 KB',
-    dataUrl: '/documentos/certificados/Certifica%C3%A7%C3%A3o%20HDI-DST.pdf',
+    dataUrl: 'documentos/certificados/certificacao-hdi-dst.pdf',
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
@@ -73,7 +94,7 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     fileName: 'Certificado Bradesco ITIL.pdf',
     fileType: 'pdf',
     fileSize: '286 KB',
-    dataUrl: '/documentos/certificados/Certificado%20Bradesco%20ITIL.pdf',
+    dataUrl: 'documentos/certificados/certificado-bradesco-itil.pdf',
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
@@ -84,7 +105,7 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     fileName: 'ITIL4.png',
     fileType: 'image',
     fileSize: '396 KB',
-    dataUrl: '/documentos/certificados/ITIL4.png',
+    dataUrl: 'documentos/certificados/itil4.png',
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
@@ -95,7 +116,7 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     fileName: 'MS-900.png',
     fileType: 'image',
     fileSize: '325 KB',
-    dataUrl: '/documentos/certificados/MS-900.png',
+    dataUrl: 'documentos/certificados/ms-900.png',
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
@@ -106,7 +127,7 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     fileName: 'Certificado Senai.jpeg',
     fileType: 'image',
     fileSize: '133 KB',
-    dataUrl: '/documentos/certificados/Certificado%20Senai.jpeg',
+    dataUrl: 'documentos/certificados/certificado-senai.jpeg',
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
@@ -117,7 +138,7 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     fileName: 'Certificado Redes.jpeg',
     fileType: 'image',
     fileSize: '116 KB',
-    dataUrl: '/documentos/certificados/Certificado%20Redes.jpeg',
+    dataUrl: 'documentos/certificados/certificado-redes.jpeg',
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
@@ -126,15 +147,27 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
 export function loadAttachments(): Record<string, AttachmentItem> {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) {
-      return { ...DEFAULT_ATTACHMENTS };
+    const parsed = raw ? JSON.parse(raw) : {};
+    // Default attachments always override localStorage for default IDs
+    const merged = { ...parsed, ...DEFAULT_ATTACHMENTS };
+    const resolved: Record<string, AttachmentItem> = {};
+    for (const [key, item] of Object.entries(merged)) {
+      resolved[key] = {
+        ...(item as AttachmentItem),
+        dataUrl: resolveAttachmentUrl((item as AttachmentItem).dataUrl),
+      };
     }
-    const parsed = JSON.parse(raw);
-    // Default attachments always override localStorage for the same IDs
-    return { ...parsed, ...DEFAULT_ATTACHMENTS };
+    return resolved;
   } catch (err) {
     console.error('Error loading attachments from localStorage:', err);
-    return { ...DEFAULT_ATTACHMENTS };
+    const resolved: Record<string, AttachmentItem> = {};
+    for (const [key, item] of Object.entries(DEFAULT_ATTACHMENTS)) {
+      resolved[key] = {
+        ...item,
+        dataUrl: resolveAttachmentUrl(item.dataUrl),
+      };
+    }
+    return resolved;
   }
 }
 
