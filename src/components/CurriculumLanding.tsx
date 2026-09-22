@@ -93,7 +93,7 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {/* Carta de Apresentação */}
               {onOpenCoverLetter && (
                 <button
@@ -121,21 +121,6 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                     <Award className="w-3.5 h-3.5" />
                   </div>
                   <span className="truncate">Carta de Recomendação</span>
-                </button>
-              )}
-
-              {/* Anexos */}
-              {onOpenAttachmentsDrawer && (
-                <button
-                  type="button"
-                  onClick={onOpenAttachmentsDrawer}
-                  className="group w-full inline-flex items-center justify-center sm:justify-start gap-2 px-3 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-800 hover:text-slate-900 border border-slate-200/90 hover:border-slate-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
-                  title="Ver diplomas, certificados e anexos"
-                >
-                  <div className="w-6 h-6 rounded-md bg-slate-100 text-slate-600 flex items-center justify-center shrink-0 group-hover:bg-slate-700 group-hover:text-white transition-colors">
-                    <Paperclip className="w-3.5 h-3.5" />
-                  </div>
-                  <span className="truncate">Anexos ({totalAttachments})</span>
                 </button>
               )}
             </div>
