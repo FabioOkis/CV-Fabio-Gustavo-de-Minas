@@ -19,20 +19,22 @@ body {
 /* Print Specific Rules */
 @media print {
   @page {
-    margin: 12mm 15mm;
+    margin: 10mm 12mm;
     size: A4;
   }
 
-  body {
+  html, body {
     background: #ffffff !important;
     color: #000000 !important;
+    font-size: 11.5px !important;
+    line-height: 1.35 !important;
   }
 
   .no-print {
     display: none !important;
   }
 
-  /* Force clean black typography in print */
+  /* Force clean typography */
   h1, h2, h3, p, span, li, a {
     color: #000000 !important;
     text-shadow: none !important;
@@ -43,7 +45,40 @@ body {
   }
 
   hr {
-    border-color: #333333 !important;
+    border-color: #444444 !important;
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  /* Flow sections across pages without artificial breaks */
+  section {
+    margin-bottom: 0.65rem !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  /* Keep headers glued to following text */
+  h1, h2, h3 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Allow experience blocks to split naturally across pages */
+  .job-item, section > div {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  ul {
+    margin-top: 0.15rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  li {
+    margin-bottom: 0.1rem !important;
+    orphans: 2;
+    widows: 2;
   }
 }
 
