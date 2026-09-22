@@ -11,11 +11,16 @@ import {
   Award,
   Menu,
   X,
+  UserPlus,
+  Globe,
 } from 'lucide-react';
 import { CV_DATA } from '../data/cvData';
+import { downloadVCard } from '../utils/vcard';
 
 interface ExecutiveHeaderBarProps {
   totalAttachments: number;
+  lang?: 'pt' | 'en';
+  onToggleLang?: () => void;
   onOpenAttachmentsDrawer: () => void;
   onOpenCoverLetter: () => void;
   onOpenRecommendationLetter: () => void;
@@ -23,6 +28,8 @@ interface ExecutiveHeaderBarProps {
 
 export const ExecutiveHeaderBar: React.FC<ExecutiveHeaderBarProps> = ({
   totalAttachments,
+  lang = 'pt',
+  onToggleLang,
   onOpenAttachmentsDrawer,
   onOpenCoverLetter,
   onOpenRecommendationLetter,
@@ -137,6 +144,17 @@ IDIOMAS
             </span>
           </button>
 
+          {/* Salvar Contato (vCard) */}
+          <button
+            type="button"
+            onClick={downloadVCard}
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-600/90 hover:bg-amber-500 text-white border border-amber-500/50 text-xs font-semibold shadow-xs transition-colors cursor-pointer"
+            title="Baixar vCard / Salvar contato na agenda do celular"
+          >
+            <UserPlus className="w-3.5 h-3.5" />
+            <span className="hidden lg:inline">Salvar vCard</span>
+          </button>
+
           {/* Imprimir / PDF */}
           <button
             type="button"
@@ -191,6 +209,19 @@ IDIOMAS
             <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
             <span className="hidden lg:inline">LinkedIn</span>
           </a>
+
+          {/* Language Switcher */}
+          {onToggleLang && (
+            <button
+              type="button"
+              onClick={onToggleLang}
+              className="inline-flex items-center gap-1 px-2 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-colors cursor-pointer"
+              title="Alternar Idioma (PT / EN)"
+            >
+              <Globe className="w-3.5 h-3.5 text-blue-400" />
+              <span className="font-mono text-[11px] text-blue-300">{lang === 'en' ? 'EN' : 'PT'}</span>
+            </button>
+          )}
         </div>
 
         {/* Right actions - Mobile View */}

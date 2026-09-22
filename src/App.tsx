@@ -38,6 +38,11 @@ export default function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [coverLetterOpen, setCoverLetterOpen] = useState(false);
   const [recommendationLetterOpen, setRecommendationLetterOpen] = useState(false);
+  const [lang, setLang] = useState<'pt' | 'en'>('pt');
+
+  const handleToggleLang = () => {
+    setLang((prev) => (prev === 'pt' ? 'en' : 'pt'));
+  };
 
   // Load attachments on initial mount
   useEffect(() => {
@@ -99,6 +104,8 @@ export default function App() {
       {/* Executive Top Action Bar */}
       <ExecutiveHeaderBar
         totalAttachments={totalAttachments}
+        lang={lang}
+        onToggleLang={handleToggleLang}
         onOpenAttachmentsDrawer={() => setDrawerOpen(true)}
         onOpenCoverLetter={() => setCoverLetterOpen(true)}
         onOpenRecommendationLetter={() => setRecommendationLetterOpen(true)}
@@ -108,6 +115,7 @@ export default function App() {
       <main className="flex-1 py-4 sm:py-10 px-2 sm:px-4 print:p-0 print:m-0">
         <CurriculumLanding
           attachments={attachments}
+          lang={lang}
           onOpenAttach={handleOpenAttach}
           onOpenView={handleOpenView}
           onOpenCoverLetter={() => setCoverLetterOpen(true)}
