@@ -106,10 +106,16 @@ export const AllAttachmentsDrawer: React.FC<AllAttachmentsDrawerProps> = ({
       subtitle: 'Green Treinamentos (Bootcamp Oficial Microsoft 365)',
     },
     {
-      id: 'senai',
-      title: 'Formação Profissional — SENAI',
+      id: 'senai_redes',
+      title: 'Administração de Redes Windows — SENAI',
       category: 'curso',
-      subtitle: 'SENAI (Certificado de Formação Profissional)',
+      subtitle: 'SENAI Informática · 2010 (Especialização 80h)',
+    },
+    {
+      id: 'senai',
+      title: 'Mantenedor de Microcomputadores PC — SENAI',
+      category: 'curso',
+      subtitle: 'SENAI Informática · 2006 (Formação 120h)',
     },
     {
       id: 'cert_redes',

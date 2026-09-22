@@ -554,10 +554,35 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
             </div>
           </li>
 
-          {/* SENAI */}
+          {/* SENAI - Redes Windows */}
           <li className="list-disc list-outside ml-4 leading-normal">
             <span>
-              Formação Profissional — SENAI (qualificação técnica e formação profissional)
+              Administração de Redes Windows — Escola SENAI de Informática, 2010 (especialização profissional, 80h)
+            </span>
+            <div className="no-print mt-1">
+              {attachments['senai_redes'] && (
+                <div className="inline-flex items-center gap-1.5 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() => onOpenView(attachments['senai_redes'])}
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white text-[11px] font-semibold shadow-2xs hover:shadow-xs border border-blue-500/30 transition-all duration-150 cursor-pointer active:scale-95 group"
+                  >
+                    <Eye className="w-3 h-3 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Ver Certificado SENAI (Redes)</span>
+                  </button>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10px] font-medium shadow-2xs">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
+                    <span>Anexado</span>
+                  </span>
+                </div>
+              )}
+            </div>
+          </li>
+
+          {/* SENAI - Hardware */}
+          <li className="list-disc list-outside ml-4 leading-normal">
+            <span>
+              Mantenedor de Microcomputadores PC — Escola SENAI de Informática, 2006 (formação continuada, 120h)
             </span>
             <div className="no-print mt-1">
               {attachments['senai'] && (
@@ -568,7 +593,7 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                     className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white text-[11px] font-semibold shadow-2xs hover:shadow-xs border border-blue-500/30 transition-all duration-150 cursor-pointer active:scale-95 group"
                   >
                     <Eye className="w-3 h-3 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Ver Certificado SENAI</span>
+                    <span>Ver Certificado SENAI (Hardware)</span>
                   </button>
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10px] font-medium shadow-2xs">
                     <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />

@@ -10,7 +10,7 @@ export interface AttachmentItem {
   isDefault?: boolean;
 }
 
-const STORAGE_KEY = 'fabio_cv_attachments_v4';
+const STORAGE_KEY = 'fabio_cv_attachments_v5';
 
 // ─── PIN de administrador ────────────────────────────────────────────────────
 // Mude este valor para definir seu PIN pessoal de acesso.
@@ -120,10 +120,21 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
+  senai_redes: {
+    id: 'senai_redes',
+    category: 'curso',
+    targetTitle: 'Especialização em Administração de Redes Windows — SENAI (2010)',
+    fileName: 'Certificado Senai Redes Windows.jpeg',
+    fileType: 'image',
+    fileSize: '120 KB',
+    dataUrl: 'documentos/certificados/certificado-senai-redes.jpeg',
+    uploadedAt: 'Original anexado',
+    isDefault: true,
+  },
   senai: {
     id: 'senai',
     category: 'curso',
-    targetTitle: 'Certificado de Formação Profissional — SENAI',
+    targetTitle: 'Mantenedor de Microcomputadores PC — SENAI (2006)',
     fileName: 'Certificado Senai.jpeg',
     fileType: 'image',
     fileSize: '133 KB',
