@@ -121,8 +121,8 @@ IDIOMAS
           </div>
         </div>
 
-        {/* Truly Centered Action Buttons for Desktop */}
-        <div className="hidden md:flex items-center justify-center gap-1.5 lg:gap-2 absolute left-1/2 -translate-x-1/2 pointer-events-auto">
+        {/* Centered Action Buttons for Desktop (Positioned to clear left identity) */}
+        <div className="hidden md:flex items-center justify-center gap-1.5 lg:gap-2 absolute left-[55%] -translate-x-1/2 pointer-events-auto">
           {/* Anexos button */}
           <button
             type="button"
