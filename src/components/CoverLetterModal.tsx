@@ -25,7 +25,7 @@ export const CoverLetterModal: React.FC<CoverLetterModalProps> = ({
 
   const letterBody = `FÁBIO GUSTAVO DE MINAS
 Analista de Suporte PL — Suporte VIP, Executivo & Ambientes Corporativos de Alta Exigência
-São Paulo, SP | (11) 95423-7500 | fabiominas@outlook.com | linkedin.com/in/fabio-gustavo-de-minas-3951629b
+São Paulo, SP | (11) 95423-7500 | fabiominas@outlook.com | linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/
 
 À Atenção da Equipe de Recrutamento e Gestores de Tecnologia da Informação,
 
@@ -76,7 +76,7 @@ São Paulo, SP`;
         <body>
           <h1>FÁBIO GUSTAVO DE MINAS</h1>
           <div class="subtitle">Analista de Suporte PL — Suporte VIP, Executivo & Ambientes Corporativos de Alta Exigência</div>
-          <div class="contact">São Paulo, SP | (11) 95423-7500 | fabiominas@outlook.com | linkedin.com/in/fabio-gustavo-de-minas-3951629b</div>
+          <div class="contact">São Paulo, SP | (11) 95423-7500 | fabiominas@outlook.com | linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/</div>
           
           <p><strong>À Atenção da Equipe de Recrutamento e Gestores de Tecnologia da Informação,</strong></p>
           <p>Prezados(as) Senhores(as),</p>
@@ -208,12 +208,12 @@ São Paulo, SP`;
               <span>fabiominas@outlook.com</span>
               <span>•</span>
               <a
-                href="https://www.linkedin.com/in/fabio-gustavo-de-minas-3951629b"
+                href="https://www.linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:underline"
               >
-                linkedin.com/in/fabio-gustavo-de-minas-3951629b
+                linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/
               </a>
             </div>
           </div>

@@ -40,7 +40,7 @@ echo -e "\${PURPLE}[CONTATOS & LINKS]\${RESET}"
 echo -e "  \${GREEN}WhatsApp:\${RESET} https://wa.me/5511954237500"
 echo -e "  \${CYAN}Telefone:\${RESET} (11) 95423-7500 (tel:11954237500)"
 echo -e "  \${YELLOW}E-mail:\${RESET}   fabiominas@outlook.com (mailto:fabiominas@outlook.com)"
-echo -e "  \${CYAN}LinkedIn:\${RESET} https://linkedin.com/in/fabio-gustavo-de-minas-3951629b"
+echo -e "  \${CYAN}LinkedIn:\${RESET} https://www.linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/"
 echo -e "  \${PURPLE}GitHub:\${RESET}   https://github.com/fabiominas"
 echo ""
 

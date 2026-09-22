@@ -158,7 +158,7 @@ export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
             </a>
 
             <a
-              href="https://www.linkedin.com/in/fabio-gustavo-de-minas-3951629b"
+              href="https://www.linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-800/60 hover:bg-slate-800 text-blue-300 border border-slate-700/60 transition-colors whitespace-nowrap"

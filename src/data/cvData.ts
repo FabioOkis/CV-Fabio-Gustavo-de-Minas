@@ -30,7 +30,7 @@ export const CV_DATA: {
     phone: '(11) 95423-7500',
     email: 'fabiominas@outlook.com',
     whatsapp: 'https://wa.me/5511954237500',
-    linkedin: 'https://www.linkedin.com/in/fabio-gustavo-de-minas-3951629b',
+    linkedin: 'https://www.linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/',
     github: 'https://github.com/fabiominas',
   },
   summary:

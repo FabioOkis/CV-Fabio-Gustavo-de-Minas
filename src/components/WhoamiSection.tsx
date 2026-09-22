@@ -112,7 +112,7 @@ export const WhoamiSection: React.FC<WhoamiSectionProps> = ({ contact }) => {
           className="text-[#4FD1C0] hover:underline flex items-center gap-1"
           aria-label="Perfil no LinkedIn (abre em nova aba)"
         >
-          <span>↗</span> <span>linkedin.com/in/fabio-gustavo-de-minas-3951629b</span>
+          <span>↗</span> <span>linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/</span>
         </a>
 
         <a

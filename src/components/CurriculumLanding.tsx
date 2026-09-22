@@ -54,12 +54,12 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
           </a>
           <span className="text-slate-400">|</span>
           <a
-            href="https://www.linkedin.com/in/fabio-gustavo-de-minas-3951629b"
+            href="https://www.linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-700 hover:underline text-blue-700 font-medium transition-colors"
           >
-            linkedin.com/in/fabio-gustavo-de-minas-3951629b
+            linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/
           </a>
         </address>
 
