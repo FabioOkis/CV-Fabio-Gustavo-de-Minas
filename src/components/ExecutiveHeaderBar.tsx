@@ -102,7 +102,7 @@ IDIOMAS
 
   return (
     <header className="no-print sticky top-0 z-40 w-full bg-slate-900/98 backdrop-blur-md border-b border-slate-800 text-white shadow-md">
-      <div className="max-w-6xl mx-auto px-3 sm:px-6 h-14 flex items-center gap-2 sm:gap-4">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 h-14 flex items-center justify-between relative">
         {/* Left identity */}
         <div className="flex items-center gap-2 sm:gap-2.5 min-w-0 shrink-0">
           <div className="w-8 h-8 rounded-lg bg-blue-600/30 border border-blue-500/40 text-blue-400 flex items-center justify-center shrink-0 shadow-inner">
@@ -121,77 +121,76 @@ IDIOMAS
           </div>
         </div>
 
-        <div className="flex-1 flex justify-center min-w-0">
-          <div className="hidden md:flex items-center gap-1.5 lg:gap-2 shrink-0 flex-nowrap">
-            {/* Anexos button */}
-            <button
-              type="button"
-              onClick={onOpenAttachmentsDrawer}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
-              title="Ver e gerenciar diplomas e certificados anexados"
-            >
-              <Paperclip className="w-3.5 h-3.5" />
-              <span>Anexos</span>
-              <span className="bg-blue-800 text-white text-[10px] px-1.5 py-0.2 rounded-full font-mono">
-                {totalAttachments}
-              </span>
-            </button>
+        {/* Truly Centered Action Buttons for Desktop */}
+        <div className="hidden md:flex items-center justify-center gap-1.5 lg:gap-2 absolute left-1/2 -translate-x-1/2 pointer-events-auto">
+          {/* Anexos button */}
+          <button
+            type="button"
+            onClick={onOpenAttachmentsDrawer}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
+            title="Ver e gerenciar diplomas e certificados anexados"
+          >
+            <Paperclip className="w-3.5 h-3.5" />
+            <span>Anexos</span>
+            <span className="bg-blue-800 text-white text-[10px] px-1.5 py-0.2 rounded-full font-mono">
+              {totalAttachments}
+            </span>
+          </button>
 
-            {/* Imprimir / PDF */}
-            <button
-              type="button"
-              onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 text-xs font-medium transition-colors cursor-pointer"
-              title="Imprimir ou Salvar em PDF"
-            >
-              <Printer className="w-3.5 h-3.5 text-teal-400" />
-              <span className="hidden xl:inline">Imprimir / PDF</span>
-            </button>
+          {/* Imprimir / PDF */}
+          <button
+            type="button"
+            onClick={handlePrint}
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 text-xs font-medium transition-colors cursor-pointer"
+            title="Imprimir ou Salvar em PDF"
+          >
+            <Printer className="w-3.5 h-3.5 text-teal-400" />
+            <span className="hidden lg:inline">Imprimir / PDF</span>
+          </button>
 
-            {/* Copiar texto */}
-            <button
-              type="button"
-              onClick={handleCopyText}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 text-xs font-medium transition-colors cursor-pointer"
-              title="Copiar texto formatado do currículo"
-            >
-              {copied ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="hidden xl:inline text-emerald-300">Copiado!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5 text-slate-400" />
-                  <span className="hidden xl:inline">Copiar</span>
-                </>
-              )}
-            </button>
+          {/* Copiar texto */}
+          <button
+            type="button"
+            onClick={handleCopyText}
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 text-xs font-medium transition-colors cursor-pointer"
+            title="Copiar texto formatado do currículo"
+          >
+            {copied ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="hidden lg:inline text-emerald-300">Copiado!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-3.5 h-3.5 text-slate-400" />
+                <span className="hidden lg:inline">Copiar</span>
+              </>
+            )}
+          </button>
 
-            {/* WhatsApp */}
-            <a
-              href="https://wa.me/5511954237500"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-medium transition-colors"
-              title="Conversar no WhatsApp"
-            >
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span className="hidden xl:inline">WhatsApp</span>
-            </a>
+          {/* WhatsApp */}
+          <a
+            href="https://wa.me/5511954237500"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-medium transition-colors"
+            title="Conversar no WhatsApp"
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span className="hidden lg:inline">WhatsApp</span>
+          </a>
 
-            {/* LinkedIn */}
-            <a
-              href="https://www.linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-medium transition-colors"
-              title="Abrir perfil no LinkedIn"
-            >
-              <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
-              <span className="hidden xl:inline">LinkedIn</span>
-            </a>
-          </div>
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-medium transition-colors"
+            title="Abrir perfil no LinkedIn"
+          >
+            <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
+            <span className="hidden lg:inline">LinkedIn</span>
+          </a>
         </div>
 
         {/* Right actions - Mobile View */}
