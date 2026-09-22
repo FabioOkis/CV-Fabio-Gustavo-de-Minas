@@ -12,6 +12,8 @@ import {
   X,
   UserPlus,
   Globe,
+  Lock,
+  Unlock,
 } from 'lucide-react';
 import { CV_DATA } from '../data/cvData';
 import { downloadVCard } from '../utils/vcard';
@@ -23,6 +25,8 @@ interface ExecutiveHeaderBarProps {
   onOpenAttachmentsDrawer: () => void;
   onOpenCoverLetter: () => void;
   onOpenRecommendationLetter: () => void;
+  isAdmin?: boolean;
+  onRequestAdmin?: () => void;
 }
 
 export const ExecutiveHeaderBar: React.FC<ExecutiveHeaderBarProps> = ({
@@ -32,6 +36,8 @@ export const ExecutiveHeaderBar: React.FC<ExecutiveHeaderBarProps> = ({
   onOpenAttachmentsDrawer,
   onOpenCoverLetter,
   onOpenRecommendationLetter,
+  isAdmin = false,
+  onRequestAdmin,
 }) => {
   const [copied, setCopied] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -128,7 +134,7 @@ IDIOMAS
         </div>
 
         {/* Centered Action Buttons for Desktop (Positioned to clear left identity) */}
-        <div className="hidden md:flex items-center justify-center gap-1.5 lg:gap-2 absolute left-[55%] -translate-x-1/2 pointer-events-auto">
+        <div className="hidden md:flex items-center justify-center gap-1.5 lg:gap-2 absolute left-1/2 -translate-x-1/2 pointer-events-auto">
           {/* Imprimir / PDF */}
           <button
             type="button"
@@ -198,13 +204,30 @@ IDIOMAS
           )}
         </div>
 
-        {/* Right actions - Mobile View */}
-        <div className="flex md:hidden items-center gap-1.5 shrink-0 ml-auto">
-          {/* Menu / Ações Toggle */}
+        {/* Right: Admin lock + Mobile Menu toggle */}
+        <div className="flex items-center gap-1.5 shrink-0 ml-auto">
+          {/* Admin toggle (visible on all screen sizes, subtle) */}
+          {onRequestAdmin && (
+            <button
+              type="button"
+              onClick={onRequestAdmin}
+              title={isAdmin ? 'Sair do modo admin' : 'Acesso administrativo'}
+              className={`p-1.5 rounded-lg border text-xs transition-all cursor-pointer ${
+                isAdmin
+                  ? 'bg-amber-600/20 border-amber-500/40 text-amber-400 hover:bg-amber-600/30'
+                  : 'bg-slate-800 border-slate-700 text-slate-600 hover:text-slate-400 hover:border-slate-600'
+              }`}
+              aria-label="Modo administrador"
+            >
+              {isAdmin ? <Unlock className="w-3.5 h-3.5" /> : <Lock className="w-3 h-3" />}
+            </button>
+          )}
+
+          {/* Mobile Menu Toggle */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold transition-all cursor-pointer ${
+            className={`inline-flex md:hidden items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold transition-all cursor-pointer ${
               mobileMenuOpen
                 ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
                 : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700'

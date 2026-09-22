@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ExecutiveHeaderBar } from './components/ExecutiveHeaderBar';
 import { CurriculumLanding } from './components/CurriculumLanding';
 import { AttachModal } from './components/AttachModal';
@@ -11,10 +11,13 @@ import {
   AttachmentItem,
   loadAttachments,
   removeAttachment as removeStorageAttachment,
+  checkAdminPin,
 } from './utils/attachmentStorage';
 
 export default function App() {
   const [attachments, setAttachments] = useState<Record<string, AttachmentItem>>({});
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const [attachModal, setAttachModal] = useState<{
     isOpen: boolean;
     targetId: string;
@@ -50,11 +53,33 @@ export default function App() {
     setAttachments(data);
   }, []);
 
+  // ─── Admin PIN ─────────────────────────────────────────────────────────────
+  const handleRequestAdmin = useCallback(() => {
+    if (isAdmin) {
+      // Log out of admin mode
+      setIsAdmin(false);
+      return;
+    }
+    const pin = window.prompt('🔐 Digite o PIN de administrador para habilitar o gerenciamento de anexos:');
+    if (pin === null) return; // user cancelled
+    if (checkAdminPin(pin)) {
+      setIsAdmin(true);
+      alert('✅ Modo administrador ativado. Você pode agora gerenciar os anexos.');
+    } else {
+      alert('❌ PIN incorreto. Acesso negado.');
+    }
+  }, [isAdmin]);
+
+  // ─── Attach actions (admin-only) ───────────────────────────────────────────
   const handleOpenAttach = (
     targetId: string,
     targetTitle: string,
     category: 'diploma' | 'certificacao' | 'curso' | 'documento' | 'carta'
   ) => {
+    if (!isAdmin) {
+      handleRequestAdmin();
+      return;
+    }
     setAttachModal({
       isOpen: true,
       targetId,
@@ -89,12 +114,15 @@ export default function App() {
   };
 
   const handleRemoveAttachment = (id: string) => {
+    if (!isAdmin) return;
     removeStorageAttachment(id);
     setAttachments((prev) => {
       const copy = { ...prev };
       delete copy[id];
       return copy;
     });
+    // Re-load to restore defaults
+    setAttachments(loadAttachments());
   };
 
   const totalAttachments = Object.keys(attachments).length;
@@ -109,6 +137,8 @@ export default function App() {
         onOpenAttachmentsDrawer={() => setDrawerOpen(true)}
         onOpenCoverLetter={() => setCoverLetterOpen(true)}
         onOpenRecommendationLetter={() => setRecommendationLetterOpen(true)}
+        isAdmin={isAdmin}
+        onRequestAdmin={handleRequestAdmin}
       />
 
       {/* Main Container / Paper Sheet */}
@@ -116,6 +146,7 @@ export default function App() {
         <CurriculumLanding
           attachments={attachments}
           lang={lang}
+          isAdmin={isAdmin}
           onOpenAttach={handleOpenAttach}
           onOpenView={handleOpenView}
           onOpenCoverLetter={() => setCoverLetterOpen(true)}
@@ -128,6 +159,8 @@ export default function App() {
       <ExecutiveFooter
         onOpenCoverLetter={() => setCoverLetterOpen(true)}
         onOpenRecommendationLetter={() => setRecommendationLetterOpen(true)}
+        isAdmin={isAdmin}
+        onRequestAdmin={handleRequestAdmin}
       />
 
       {/* Modals */}
@@ -140,6 +173,7 @@ export default function App() {
         }
         onOpenViewAttachment={handleOpenView}
         onOpenAttachmentsDrawer={() => setDrawerOpen(true)}
+        isAdmin={isAdmin}
       />
 
       <RecommendationLetterModal
@@ -155,6 +189,7 @@ export default function App() {
         }
         onOpenViewAttachment={handleOpenView}
         onOpenAttachmentsDrawer={() => setDrawerOpen(true)}
+        isAdmin={isAdmin}
       />
 
       <AttachModal
@@ -171,6 +206,7 @@ export default function App() {
         isOpen={viewerModal.isOpen}
         onClose={handleCloseView}
         attachment={viewerModal.attachment}
+        isAdmin={isAdmin}
         onRemove={handleRemoveAttachment}
         onReplace={(item) => {
           handleOpenAttach(item.id, item.targetTitle, item.category);
@@ -181,6 +217,7 @@ export default function App() {
         isOpen={drawerOpen}
         onClose={() => setDrawerOpen(false)}
         attachments={attachments}
+        isAdmin={isAdmin}
         onOpenAttach={handleOpenAttach}
         onOpenView={handleOpenView}
         onRemove={handleRemoveAttachment}

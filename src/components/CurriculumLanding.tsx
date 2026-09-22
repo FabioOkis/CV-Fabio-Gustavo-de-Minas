@@ -8,6 +8,7 @@ import { downloadVCard } from '../utils/vcard';
 interface CurriculumLandingProps {
   attachments: Record<string, AttachmentItem>;
   lang?: 'pt' | 'en';
+  isAdmin?: boolean;
   onOpenAttach: (
     targetId: string,
     targetTitle: string,
@@ -22,6 +23,7 @@ interface CurriculumLandingProps {
 export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
   attachments,
   lang = 'pt',
+  isAdmin = false,
   onOpenAttach,
   onOpenView,
   onOpenCoverLetter,
@@ -307,26 +309,28 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                     <Eye className="w-3.5 h-3.5" />
                     <span>Visualizar Diploma / Certificado</span>
                   </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      onOpenAttach(
-                        'mba',
-                        'MBA em Gestão de Pessoas — UNINOVE (2018)',
-                        'diploma'
-                      )
-                    }
-                    className="inline-flex items-center gap-1 px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium transition-colors cursor-pointer"
-                    title="Substituir por outro arquivo"
-                  >
-                    <Upload className="w-3 h-3" />
-                    <span>Substituir</span>
-                  </button>
+                  {isAdmin && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        onOpenAttach(
+                          'mba',
+                          'MBA em Gestão de Pessoas — UNINOVE (2018)',
+                          'diploma'
+                        )
+                      }
+                      className="inline-flex items-center gap-1 px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium transition-colors cursor-pointer"
+                      title="Substituir por outro arquivo"
+                    >
+                      <Upload className="w-3 h-3" />
+                      <span>Substituir</span>
+                    </button>
+                  )}
                   <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 font-medium">
                     <CheckCircle2 className="w-3 h-3" /> Anexado
                   </span>
                 </div>
-              ) : (
+              ) : isAdmin ? (
                 <button
                   type="button"
                   onClick={() =>
@@ -341,7 +345,7 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                   <Paperclip className="w-3.5 h-3.5 text-blue-600" />
                   <span>Anexar Diploma (PDF ou Imagem)</span>
                 </button>
-              )}
+              ) : null}
             </div>
           </div>
 
@@ -364,26 +368,28 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                     <Eye className="w-3.5 h-3.5" />
                     <span>Visualizar Diploma / Certificado</span>
                   </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      onOpenAttach(
-                        'redes',
-                        'Graduação e Pós-Graduação em Redes — UNINOVE (2016)',
-                        'diploma'
-                      )
-                    }
-                    className="inline-flex items-center gap-1 px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium transition-colors cursor-pointer"
-                    title="Substituir por outro arquivo"
-                  >
-                    <Upload className="w-3 h-3" />
-                    <span>Substituir</span>
-                  </button>
+                  {isAdmin && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        onOpenAttach(
+                          'redes',
+                          'Graduação e Pós-Graduação em Redes — UNINOVE (2016)',
+                          'diploma'
+                        )
+                      }
+                      className="inline-flex items-center gap-1 px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium transition-colors cursor-pointer"
+                      title="Substituir por outro arquivo"
+                    >
+                      <Upload className="w-3 h-3" />
+                      <span>Substituir</span>
+                    </button>
+                  )}
                   <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 font-medium">
                     <CheckCircle2 className="w-3 h-3" /> Anexado
                   </span>
                 </div>
-              ) : (
+              ) : isAdmin ? (
                 <button
                   type="button"
                   onClick={() =>
@@ -398,7 +404,7 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                   <Paperclip className="w-3.5 h-3.5 text-blue-600" />
                   <span>Anexar Diploma (PDF ou Imagem)</span>
                 </button>
-              )}
+              ) : null}
             </div>
           </div>
         </div>
@@ -410,20 +416,22 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
           <h2 className="text-[13px] sm:text-[13.5px] font-bold text-slate-900 tracking-wide uppercase">
             CERTIFICAÇÕES
           </h2>
-          <button
-            type="button"
-            onClick={() =>
-              onOpenAttach(
-                `cert_custom_${Date.now()}`,
-                'Certificado Adicional / Treinamento',
-                'certificacao'
-              )
-            }
-            className="no-print inline-flex items-center gap-1 text-xs font-medium text-blue-700 hover:text-blue-900 hover:underline cursor-pointer"
-          >
-            <Paperclip className="w-3.5 h-3.5" />
-            <span>+ Anexar Outro Certificado</span>
-          </button>
+          {isAdmin && (
+            <button
+              type="button"
+              onClick={() =>
+                onOpenAttach(
+                  `cert_custom_${Date.now()}`,
+                  'Certificado Adicional / Treinamento',
+                  'certificacao'
+                )
+              }
+              className="no-print inline-flex items-center gap-1 text-xs font-medium text-blue-700 hover:text-blue-900 hover:underline cursor-pointer"
+            >
+              <Paperclip className="w-3.5 h-3.5" />
+              <span>+ Anexar Outro Certificado</span>
+            </button>
+          )}
         </div>
         <hr className="border-t border-slate-300 my-1" />
 
@@ -444,25 +452,27 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                     <Eye className="w-3 h-3" />
                     <span>Visualizar Certificado</span>
                   </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      onOpenAttach(
-                        'hdi',
-                        'HDI Desktop Support Technician — HDI Brasil',
-                        'certificacao'
-                      )
-                    }
-                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium cursor-pointer"
-                  >
-                    <Upload className="w-3 h-3" />
-                    <span>Substituir</span>
-                  </button>
+                  {isAdmin && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        onOpenAttach(
+                          'hdi',
+                          'HDI Desktop Support Technician — HDI Brasil',
+                          'certificacao'
+                        )
+                      }
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium cursor-pointer"
+                    >
+                      <Upload className="w-3 h-3" />
+                      <span>Substituir</span>
+                    </button>
+                  )}
                   <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 font-medium">
                     <CheckCircle2 className="w-3 h-3" /> Anexado
                   </span>
                 </div>
-              ) : (
+              ) : isAdmin ? (
                 <button
                   type="button"
                   onClick={() =>
@@ -477,7 +487,7 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                   <Paperclip className="w-3 h-3 text-blue-600" />
                   <span>Anexar Certificado HDI (PDF ou Imagem)</span>
                 </button>
-              )}
+              ) : null}
             </div>
           </li>
 
@@ -497,25 +507,27 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                     <Eye className="w-3 h-3" />
                     <span>Visualizar Certificado</span>
                   </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      onOpenAttach(
-                        'itil',
-                        'ITIL V3 Foundation — Fundação Bradesco',
-                        'certificacao'
-                      )
-                    }
-                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium cursor-pointer"
-                  >
-                    <Upload className="w-3 h-3" />
-                    <span>Substituir</span>
-                  </button>
+                  {isAdmin && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        onOpenAttach(
+                          'itil',
+                          'ITIL V3 Foundation — Fundação Bradesco',
+                          'certificacao'
+                        )
+                      }
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-medium cursor-pointer"
+                    >
+                      <Upload className="w-3 h-3" />
+                      <span>Substituir</span>
+                    </button>
+                  )}
                   <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 font-medium">
                     <CheckCircle2 className="w-3 h-3" /> Anexado
                   </span>
                 </div>
-              ) : (
+              ) : isAdmin ? (
                 <button
                   type="button"
                   onClick={() =>
@@ -530,7 +542,7 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                   <Paperclip className="w-3 h-3 text-blue-600" />
                   <span>Anexar Certificado ITIL V3 (PDF ou Imagem)</span>
                 </button>
-              )}
+              ) : null}
             </div>
           </li>
 

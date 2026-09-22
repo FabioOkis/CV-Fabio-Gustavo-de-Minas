@@ -6,6 +6,7 @@ interface RecommendationLetterModalProps {
   isOpen: boolean;
   onClose: () => void;
   attachment?: AttachmentItem;
+  isAdmin?: boolean;
   onOpenAttach: () => void;
   onOpenViewAttachment?: (attachment: AttachmentItem) => void;
   onOpenAttachmentsDrawer: () => void;
@@ -15,6 +16,7 @@ export const RecommendationLetterModal: React.FC<RecommendationLetterModalProps>
   isOpen,
   onClose,
   attachment,
+  isAdmin = false,
   onOpenAttach,
   onOpenViewAttachment,
   onOpenAttachmentsDrawer,
@@ -301,17 +303,19 @@ Pinheiro Neto Advogados · São Paulo, SP`;
         {/* Footer actions with links to attachments */}
         <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-3.5 border-t border-slate-200 bg-slate-50 shrink-0">
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                onClose();
-                onOpenAttach();
-              }}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-blue-50 text-blue-700 border border-blue-300 text-xs font-semibold transition-colors cursor-pointer"
-            >
-              <Upload className="w-3.5 h-3.5" />
-              <span>{attachment ? 'Substituir Documento (PDF/Scan)' : 'Anexar Documento Assinado (PDF/Scan)'}</span>
-            </button>
+            {isAdmin && (
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onOpenAttach();
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-blue-50 text-blue-700 border border-blue-300 text-xs font-semibold transition-colors cursor-pointer"
+              >
+                <Upload className="w-3.5 h-3.5" />
+                <span>{attachment ? 'Substituir Documento (PDF/Scan)' : 'Anexar Documento Assinado (PDF/Scan)'}</span>
+              </button>
+            )}
 
             <button
               type="button"

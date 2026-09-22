@@ -6,6 +6,7 @@ interface ViewerModalProps {
   isOpen: boolean;
   onClose: () => void;
   attachment: AttachmentItem | null;
+  isAdmin?: boolean;
   onRemove?: (id: string) => void;
   onReplace?: (item: AttachmentItem) => void;
 }
@@ -14,6 +15,7 @@ export const ViewerModal: React.FC<ViewerModalProps> = ({
   isOpen,
   onClose,
   attachment,
+  isAdmin = false,
   onRemove,
   onReplace,
 }) => {
@@ -99,8 +101,8 @@ export const ViewerModal: React.FC<ViewerModalProps> = ({
               <span className="hidden sm:inline">Baixar</span>
             </button>
 
-            {/* Replace */}
-            {onReplace && (
+            {/* Replace - admin only */}
+            {isAdmin && onReplace && (
               <button
                 onClick={() => {
                   onClose();
@@ -114,8 +116,8 @@ export const ViewerModal: React.FC<ViewerModalProps> = ({
               </button>
             )}
 
-            {/* Remove custom upload */}
-            {onRemove && (
+            {/* Remove - admin only */}
+            {isAdmin && onRemove && (
               <button
                 onClick={() => {
                   if (window.confirm(`Deseja desanexar este documento (${attachment.fileName})?`)) {

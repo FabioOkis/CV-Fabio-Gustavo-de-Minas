@@ -6,6 +6,7 @@ interface AllAttachmentsDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   attachments: Record<string, AttachmentItem>;
+  isAdmin?: boolean;
   onOpenAttach: (
     targetId: string,
     targetTitle: string,
@@ -21,6 +22,7 @@ export const AllAttachmentsDrawer: React.FC<AllAttachmentsDrawerProps> = ({
   isOpen,
   onClose,
   attachments,
+  isAdmin = false,
   onOpenAttach,
   onOpenView,
   onRemove,
@@ -207,19 +209,21 @@ export const AllAttachmentsDrawer: React.FC<AllAttachmentsDrawerProps> = ({
                             <Eye className="w-3.5 h-3.5" />
                             <span>Ver PDF</span>
                           </button>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              onOpenAttach(letItem.id, letItem.title, letItem.category)
-                            }
-                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300/80 text-xs font-medium transition-colors cursor-pointer active:scale-95"
-                            title="Substituir arquivo anexado"
-                          >
-                            <Upload className="w-3.5 h-3.5 text-slate-500" />
-                            <span className="hidden sm:inline">Substituir</span>
-                          </button>
+                          {isAdmin && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                onOpenAttach(letItem.id, letItem.title, letItem.category)
+                              }
+                              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300/80 text-xs font-medium transition-colors cursor-pointer active:scale-95"
+                              title="Substituir arquivo anexado"
+                            >
+                              <Upload className="w-3.5 h-3.5 text-slate-500" />
+                              <span className="hidden sm:inline">Substituir</span>
+                            </button>
+                          )}
                         </>
-                      ) : (
+                      ) : isAdmin ? (
                         <button
                           type="button"
                           onClick={() =>
@@ -230,7 +234,7 @@ export const AllAttachmentsDrawer: React.FC<AllAttachmentsDrawerProps> = ({
                           <Upload className="w-3.5 h-3.5" />
                           <span>Anexar PDF</span>
                         </button>
-                      )}
+                      ) : null}
                     </div>
                   </div>
                 );
@@ -297,19 +301,21 @@ export const AllAttachmentsDrawer: React.FC<AllAttachmentsDrawerProps> = ({
                             <Eye className="w-3.5 h-3.5" />
                             <span>Ver</span>
                           </button>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              onOpenAttach(std.id, std.title, std.category)
-                            }
-                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300/80 text-xs font-medium transition-colors cursor-pointer active:scale-95"
-                            title="Substituir arquivo"
-                          >
-                            <Upload className="w-3.5 h-3.5 text-slate-500" />
-                            <span className="hidden sm:inline">Substituir</span>
-                          </button>
+                          {isAdmin && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                onOpenAttach(std.id, std.title, std.category)
+                              }
+                              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300/80 text-xs font-medium transition-colors cursor-pointer active:scale-95"
+                              title="Substituir arquivo"
+                            >
+                              <Upload className="w-3.5 h-3.5 text-slate-500" />
+                              <span className="hidden sm:inline">Substituir</span>
+                            </button>
+                          )}
                         </>
-                      ) : (
+                      ) : isAdmin ? (
                         <button
                           type="button"
                           onClick={() =>
@@ -320,7 +326,7 @@ export const AllAttachmentsDrawer: React.FC<AllAttachmentsDrawerProps> = ({
                           <Upload className="w-3.5 h-3.5 text-blue-600" />
                           <span>Anexar</span>
                         </button>
-                      )}
+                      ) : null}
                     </div>
                   </div>
                 );
@@ -350,53 +356,57 @@ export const AllAttachmentsDrawer: React.FC<AllAttachmentsDrawerProps> = ({
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          onClose();
-                          onOpenView(item);
-                        }}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-500/25 border border-blue-400/30 transition-all cursor-pointer active:scale-95"
-                      >
-                        <Eye className="w-3.5 h-3.5" />
-                        <span>Ver</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (window.confirm(`Deseja remover ${item.targetTitle}?`)) {
-                            onRemove(item.id);
-                          }
-                        }}
-                        className="p-1.5 text-red-500 hover:text-red-700 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
-                        title="Remover anexo"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            onClose();
+                            onOpenView(item);
+                          }}
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-500/25 border border-blue-400/30 transition-all cursor-pointer active:scale-95"
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>Ver</span>
+                        </button>
+                        {isAdmin && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (window.confirm(`Deseja remover ${item.targetTitle}?`)) {
+                                onRemove(item.id);
+                              }
+                            }}
+                            className="p-1.5 text-red-500 hover:text-red-700 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
+                            title="Remover anexo"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        )}
+                      </div>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Add extra certificate button */}
-          <div className="pt-1">
-            <button
-              type="button"
-              onClick={() =>
-                onOpenAttach(
-                  `cert_custom_${Date.now()}`,
-                  'Certificado Adicional / Treinamento',
-                  'certificacao'
-                )
-              }
-              className="w-full py-3 px-4 border-2 border-dashed border-blue-300/80 hover:border-blue-500 bg-blue-50/30 hover:bg-blue-50/80 rounded-xl text-xs font-bold text-blue-700 flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs active:scale-[0.99]"
-            >
-              <Plus className="w-4 h-4 text-blue-600" />
-              <span>Anexar Outro Documento ou Certificado</span>
-            </button>
-          </div>
+          {/* Add extra certificate button - admin only */}
+          {isAdmin && (
+            <div className="pt-1">
+              <button
+                type="button"
+                onClick={() =>
+                  onOpenAttach(
+                    `cert_custom_${Date.now()}`,
+                    'Certificado Adicional / Treinamento',
+                    'certificacao'
+                  )
+                }
+                className="w-full py-3 px-4 border-2 border-dashed border-blue-300/80 hover:border-blue-500 bg-blue-50/30 hover:bg-blue-50/80 rounded-xl text-xs font-bold text-blue-700 flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs active:scale-[0.99]"
+              >
+                <Plus className="w-4 h-4 text-blue-600" />
+                <span>Anexar Outro Documento ou Certificado</span>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Footer */}

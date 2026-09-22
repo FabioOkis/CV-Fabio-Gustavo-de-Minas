@@ -17,11 +17,15 @@ import { downloadVCard } from '../utils/vcard';
 interface ExecutiveFooterProps {
   onOpenCoverLetter?: () => void;
   onOpenRecommendationLetter?: () => void;
+  isAdmin?: boolean;
+  onRequestAdmin?: () => void;
 }
 
 export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
   onOpenCoverLetter,
   onOpenRecommendationLetter,
+  isAdmin: _isAdmin,
+  onRequestAdmin: _onRequestAdmin,
 }) => {
   const currentYear = new Date().getFullYear();
 
