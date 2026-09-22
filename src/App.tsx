@@ -6,12 +6,12 @@ import { ViewerModal } from './components/ViewerModal';
 import { AllAttachmentsDrawer } from './components/AllAttachmentsDrawer';
 import { CoverLetterModal } from './components/CoverLetterModal';
 import { RecommendationLetterModal } from './components/RecommendationLetterModal';
+import { AdminPinModal } from './components/AdminPinModal';
 import { ExecutiveFooter } from './components/ExecutiveFooter';
 import {
   AttachmentItem,
   loadAttachments,
   removeAttachment as removeStorageAttachment,
-  checkAdminPin,
 } from './utils/attachmentStorage';
 
 export default function App() {
@@ -41,6 +41,7 @@ export default function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [coverLetterOpen, setCoverLetterOpen] = useState(false);
   const [recommendationLetterOpen, setRecommendationLetterOpen] = useState(false);
+  const [adminModalOpen, setAdminModalOpen] = useState(false);
   const [lang, setLang] = useState<'pt' | 'en'>('pt');
 
   const handleToggleLang = () => {
@@ -55,20 +56,16 @@ export default function App() {
 
   // ─── Admin PIN ─────────────────────────────────────────────────────────────
   const handleRequestAdmin = useCallback(() => {
-    if (isAdmin) {
-      // Log out of admin mode
-      setIsAdmin(false);
-      return;
-    }
-    const pin = window.prompt('🔐 Digite o PIN de administrador para habilitar o gerenciamento de anexos:');
-    if (pin === null) return; // user cancelled
-    if (checkAdminPin(pin)) {
-      setIsAdmin(true);
-      alert('✅ Modo administrador ativado. Você pode agora gerenciar os anexos.');
-    } else {
-      alert('❌ PIN incorreto. Acesso negado.');
-    }
-  }, [isAdmin]);
+    setAdminModalOpen(true);
+  }, []);
+
+  const handleAdminSuccess = () => {
+    setIsAdmin(true);
+  };
+
+  const handleAdminLogout = () => {
+    setIsAdmin(false);
+  };
 
   // ─── Attach actions (admin-only) ───────────────────────────────────────────
   const handleOpenAttach = (
@@ -223,6 +220,14 @@ export default function App() {
         onRemove={handleRemoveAttachment}
         onOpenCoverLetter={() => setCoverLetterOpen(true)}
         onOpenRecommendationLetter={() => setRecommendationLetterOpen(true)}
+      />
+
+      <AdminPinModal
+        isOpen={adminModalOpen}
+        onClose={() => setAdminModalOpen(false)}
+        isAdmin={isAdmin}
+        onSuccess={handleAdminSuccess}
+        onLogout={handleAdminLogout}
       />
     </div>
   );

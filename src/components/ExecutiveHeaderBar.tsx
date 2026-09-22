@@ -189,7 +189,10 @@ IDIOMAS
             <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
             <span className="hidden lg:inline">LinkedIn</span>
           </a>
+        </div>
 
+        {/* Right: Language Switcher + Admin lock + Mobile Menu toggle */}
+        <div className="flex items-center gap-1.5 shrink-0 ml-auto">
           {/* Language Switcher */}
           {onToggleLang && (
             <button
@@ -202,10 +205,7 @@ IDIOMAS
               <span className="font-mono text-[11px] text-blue-300">{lang === 'en' ? 'EN' : 'PT'}</span>
             </button>
           )}
-        </div>
 
-        {/* Right: Admin lock + Mobile Menu toggle */}
-        <div className="flex items-center gap-1.5 shrink-0 ml-auto">
           {/* Admin toggle (visible on all screen sizes, subtle) */}
           {onRequestAdmin && (
             <button
@@ -215,7 +215,7 @@ IDIOMAS
               className={`p-1.5 rounded-lg border text-xs transition-all cursor-pointer ${
                 isAdmin
                   ? 'bg-amber-600/20 border-amber-500/40 text-amber-400 hover:bg-amber-600/30'
-                  : 'bg-slate-800 border-slate-700 text-slate-600 hover:text-slate-400 hover:border-slate-600'
+                  : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-200 hover:border-slate-600'
               }`}
               aria-label="Modo administrador"
             >
