@@ -91,24 +91,21 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                 <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
                 Documentos &amp; Cartas Oficiais
               </span>
-              <span className="text-[10px] text-slate-400 font-normal hidden sm:inline">
-                Acesso imediato para visualização e download
-              </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {/* Carta de Apresentação */}
               {onOpenCoverLetter && (
                 <button
                   type="button"
                   onClick={onOpenCoverLetter}
-                  className="group w-full inline-flex items-center justify-center sm:justify-start gap-2 px-2.5 py-2 rounded-lg bg-white hover:bg-blue-50/60 text-slate-800 hover:text-blue-900 border border-slate-200/90 hover:border-blue-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+                  className="group w-full inline-flex items-center justify-center sm:justify-start gap-2 px-3 py-2 rounded-lg bg-white hover:bg-blue-50/60 text-slate-800 hover:text-blue-900 border border-slate-200/90 hover:border-blue-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
                   title="Visualizar Carta de Apresentação Profissional"
                 >
                   <div className="w-6 h-6 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                     <FileText className="w-3.5 h-3.5" />
                   </div>
-                  <span className="truncate">Apresentação</span>
+                  <span className="truncate">Carta de Apresentação</span>
                 </button>
               )}
 
@@ -117,13 +114,13 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                 <button
                   type="button"
                   onClick={onOpenRecommendationLetter}
-                  className="group w-full inline-flex items-center justify-center sm:justify-start gap-2 px-2.5 py-2 rounded-lg bg-white hover:bg-amber-50/60 text-slate-800 hover:text-amber-900 border border-slate-200/90 hover:border-amber-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+                  className="group w-full inline-flex items-center justify-center sm:justify-start gap-2 px-3 py-2 rounded-lg bg-white hover:bg-amber-50/60 text-slate-800 hover:text-amber-900 border border-slate-200/90 hover:border-amber-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
                   title="Visualizar Carta de Recomendação (Pinheiro Neto Advogados)"
                 >
                   <div className="w-6 h-6 rounded-md bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 group-hover:bg-amber-600 group-hover:text-white transition-colors">
                     <Award className="w-3.5 h-3.5" />
                   </div>
-                  <span className="truncate">Recomendação</span>
+                  <span className="truncate">Carta de Recomendação</span>
                 </button>
               )}
 
@@ -132,7 +129,7 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                 <button
                   type="button"
                   onClick={onOpenAttachmentsDrawer}
-                  className="group w-full inline-flex items-center justify-center sm:justify-start gap-2 px-2.5 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-800 hover:text-slate-900 border border-slate-200/90 hover:border-slate-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+                  className="group w-full inline-flex items-center justify-center sm:justify-start gap-2 px-3 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-800 hover:text-slate-900 border border-slate-200/90 hover:border-slate-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
                   title="Ver diplomas, certificados e anexos"
                 >
                   <div className="w-6 h-6 rounded-md bg-slate-100 text-slate-600 flex items-center justify-center shrink-0 group-hover:bg-slate-700 group-hover:text-white transition-colors">
@@ -141,19 +138,6 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                   <span className="truncate">Anexos ({totalAttachments})</span>
                 </button>
               )}
-
-              {/* Salvar Contato (vCard) */}
-              <button
-                type="button"
-                onClick={downloadVCard}
-                className="group w-full inline-flex items-center justify-center sm:justify-start gap-2 px-2.5 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white border border-amber-600/80 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
-                title="Salvar vCard direto no celular"
-              >
-                <div className="w-6 h-6 rounded-md bg-amber-600 text-white flex items-center justify-center shrink-0">
-                  <UserPlus className="w-3.5 h-3.5" />
-                </div>
-                <span className="truncate">Salvar vCard</span>
-              </button>
             </div>
           </div>
         </div>
@@ -170,26 +154,6 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
         <p className="text-[12.5px] sm:text-[13px] text-slate-800 leading-relaxed text-justify">
           {cvContent.summary}
         </p>
-
-        {/* Executive KPI Metric Cards (print:hidden) */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-3 print:hidden">
-          <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-2.5 text-center shadow-2xs hover:border-blue-300 transition-colors">
-            <div className="text-base sm:text-lg font-extrabold text-blue-700 font-mono">19+ Anos</div>
-            <div className="text-[10.5px] text-slate-600 font-medium">Experiência em TI</div>
-          </div>
-          <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-2.5 text-center shadow-2xs hover:border-emerald-300 transition-colors">
-            <div className="text-base sm:text-lg font-extrabold text-emerald-700 font-mono">1.500+</div>
-            <div className="text-[10.5px] text-slate-600 font-medium">Usuários Suportados</div>
-          </div>
-          <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-2.5 text-center shadow-2xs hover:border-teal-300 transition-colors">
-            <div className="text-base sm:text-lg font-extrabold text-teal-700 font-mono">95%+ SLA</div>
-            <div className="text-[10.5px] text-slate-600 font-medium">Resolução &amp; Qualidade</div>
-          </div>
-          <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-2.5 text-center shadow-2xs hover:border-amber-300 transition-colors">
-            <div className="text-base sm:text-lg font-extrabold text-amber-700 font-mono">VIP / Executivo</div>
-            <div className="text-[10.5px] text-slate-600 font-medium">Suporte Reservado</div>
-          </div>
-        </div>
       </section>
 
       {/* ================= COMPETÊNCIAS TÉCNICAS ================= */}

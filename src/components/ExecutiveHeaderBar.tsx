@@ -144,16 +144,6 @@ IDIOMAS
             </span>
           </button>
 
-          {/* Salvar Contato (vCard) */}
-          <button
-            type="button"
-            onClick={downloadVCard}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-600/90 hover:bg-amber-500 text-white border border-amber-500/50 text-xs font-semibold shadow-xs transition-colors cursor-pointer"
-            title="Baixar vCard / Salvar contato na agenda do celular"
-          >
-            <UserPlus className="w-3.5 h-3.5" />
-            <span className="hidden lg:inline">Salvar vCard</span>
-          </button>
 
           {/* Imprimir / PDF */}
           <button

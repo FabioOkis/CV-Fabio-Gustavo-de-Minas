@@ -10,7 +10,9 @@ import {
   Award,
   ExternalLink,
   MessageSquare,
+  UserPlus,
 } from 'lucide-react';
+import { downloadVCard } from '../utils/vcard';
 
 interface ExecutiveFooterProps {
   onOpenCoverLetter?: () => void;
@@ -166,6 +168,16 @@ export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
               <ExternalLink className="w-3.5 h-3.5" />
               <span>LinkedIn</span>
             </a>
+
+            <button
+              type="button"
+              onClick={downloadVCard}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-950/70 hover:bg-amber-900/90 text-amber-300 border border-amber-800/60 transition-colors whitespace-nowrap cursor-pointer"
+              title="Baixar vCard / Salvar contato"
+            >
+              <UserPlus className="w-3.5 h-3.5 text-amber-400" />
+              <span>vCard</span>
+            </button>
           </div>
         </div>
       </div>
