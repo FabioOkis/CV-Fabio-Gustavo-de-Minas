@@ -298,16 +298,16 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
             </p>
 
             {/* Attachment Actions (hidden in print) */}
-            <div className="no-print flex items-center gap-2 pt-1">
+            <div className="no-print flex items-center gap-1.5 pt-0.5">
               {attachments['mba'] ? (
-                <div className="inline-flex items-center gap-2 flex-wrap">
+                <div className="inline-flex items-center gap-1.5 flex-wrap">
                   <button
                     type="button"
                     onClick={() => onOpenView(attachments['mba'])}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white text-[11px] font-semibold shadow-2xs hover:shadow-xs border border-blue-500/30 transition-all duration-150 cursor-pointer active:scale-95 group"
                   >
-                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Visualizar Diploma / Certificado</span>
+                    <Eye className="w-3 h-3 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Ver Diploma MBA</span>
                   </button>
                   {isAdmin && (
                     <button
@@ -319,15 +319,15 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                           'diploma'
                         )
                       }
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-300 hover:border-slate-400 text-xs font-medium shadow-2xs transition-all cursor-pointer active:scale-95"
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-300 hover:border-slate-400 text-[10px] font-medium shadow-2xs transition-all cursor-pointer active:scale-95"
                       title="Substituir por outro arquivo"
                     >
-                      <Upload className="w-3.5 h-3.5 text-slate-500" />
+                      <Upload className="w-2.5 h-2.5 text-slate-500" />
                       <span>Substituir</span>
                     </button>
                   )}
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10px] font-medium shadow-2xs">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
                     <span>Anexado</span>
                   </span>
                 </div>
@@ -341,9 +341,9 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                       'diploma'
                     )
                   }
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50/80 hover:bg-blue-100 text-blue-700 border border-dashed border-blue-300 hover:border-blue-400 text-xs font-semibold transition-all cursor-pointer active:scale-95"
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-blue-50/80 hover:bg-blue-100 text-blue-700 border border-dashed border-blue-300 hover:border-blue-400 text-[11px] font-semibold transition-all cursor-pointer active:scale-95"
                 >
-                  <Paperclip className="w-3.5 h-3.5 text-blue-600" />
+                  <Paperclip className="w-3 h-3 text-blue-600" />
                   <span>Anexar Diploma (PDF ou Imagem)</span>
                 </button>
               ) : null}
@@ -358,36 +358,36 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
             </p>
 
             {/* Attachment Actions (hidden in print) */}
-            <div className="no-print flex items-center gap-3 pt-1 flex-wrap">
+            <div className="no-print flex items-center gap-2 pt-0.5 flex-wrap">
               {attachments['graduacao'] && (
-                <div className="inline-flex items-center gap-2 flex-wrap">
+                <div className="inline-flex items-center gap-1.5 flex-wrap">
                   <button
                     type="button"
                     onClick={() => onOpenView(attachments['graduacao'])}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white text-[11px] font-semibold shadow-2xs hover:shadow-xs border border-blue-500/30 transition-all duration-150 cursor-pointer active:scale-95 group"
                   >
-                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Visualizar Diploma Graduação</span>
+                    <Eye className="w-3 h-3 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Ver Graduação</span>
                   </button>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10px] font-medium shadow-2xs">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
                     <span>Anexado</span>
                   </span>
                 </div>
               )}
 
               {attachments['redes'] && (
-                <div className="inline-flex items-center gap-2 flex-wrap">
+                <div className="inline-flex items-center gap-1.5 flex-wrap">
                   <button
                     type="button"
                     onClick={() => onOpenView(attachments['redes'])}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white text-[11px] font-semibold shadow-2xs hover:shadow-xs border border-blue-500/30 transition-all duration-150 cursor-pointer active:scale-95 group"
                   >
-                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Visualizar Diploma Pós-Graduação</span>
+                    <Eye className="w-3 h-3 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Ver Pós-Graduação</span>
                   </button>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10px] font-medium shadow-2xs">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
                     <span>Anexado</span>
                   </span>
                 </div>
@@ -428,16 +428,16 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
             <span>
               HDI Desktop Support Technician — HDI Brasil, 2018 (certificação internacional em suporte técnico e atendimento ao usuário)
             </span>
-            <div className="no-print mt-1.5">
+            <div className="no-print mt-1">
               {attachments['hdi'] ? (
-                <div className="inline-flex items-center gap-2 flex-wrap">
+                <div className="inline-flex items-center gap-1.5 flex-wrap">
                   <button
                     type="button"
                     onClick={() => onOpenView(attachments['hdi'])}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white text-[11px] font-semibold shadow-2xs hover:shadow-xs border border-blue-500/30 transition-all duration-150 cursor-pointer active:scale-95 group"
                   >
-                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Visualizar Certificado</span>
+                    <Eye className="w-3 h-3 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Ver Certificado HDI (PDF)</span>
                   </button>
                   {isAdmin && (
                     <button
@@ -449,14 +449,14 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                           'certificacao'
                         )
                       }
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-300 hover:border-slate-400 text-xs font-medium shadow-2xs transition-all cursor-pointer active:scale-95"
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-300 hover:border-slate-400 text-[10px] font-medium shadow-2xs transition-all cursor-pointer active:scale-95"
                     >
-                      <Upload className="w-3.5 h-3.5 text-slate-500" />
+                      <Upload className="w-2.5 h-2.5 text-slate-500" />
                       <span>Substituir</span>
                     </button>
                   )}
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10px] font-medium shadow-2xs">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
                     <span>Anexado</span>
                   </span>
                 </div>
@@ -470,9 +470,9 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                       'certificacao'
                     )
                   }
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50/80 hover:bg-blue-100 text-blue-700 border border-dashed border-blue-300 hover:border-blue-400 text-xs font-semibold transition-all cursor-pointer active:scale-95"
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-blue-50/80 hover:bg-blue-100 text-blue-700 border border-dashed border-blue-300 hover:border-blue-400 text-[11px] font-semibold transition-all cursor-pointer active:scale-95"
                 >
-                  <Paperclip className="w-3.5 h-3.5 text-blue-600" />
+                  <Paperclip className="w-3 h-3 text-blue-600" />
                   <span>Anexar Certificado HDI (PDF ou Imagem)</span>
                 </button>
               ) : null}
@@ -484,19 +484,19 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
             <span>
               ITIL V3 Foundation — Fundação Bradesco, 2017 (fundamentos em gerenciamento estratégico de serviços de TI)
             </span>
-            <div className="no-print mt-1.5">
+            <div className="no-print mt-1">
               {attachments['itil'] && (
-                <div className="inline-flex items-center gap-2 flex-wrap">
+                <div className="inline-flex items-center gap-1.5 flex-wrap">
                   <button
                     type="button"
                     onClick={() => onOpenView(attachments['itil'])}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white text-[11px] font-semibold shadow-2xs hover:shadow-xs border border-blue-500/30 transition-all duration-150 cursor-pointer active:scale-95 group"
                   >
-                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Visualizar Certificado ITIL V3 (PDF)</span>
+                    <Eye className="w-3 h-3 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Ver Certificado ITIL V3 (PDF)</span>
                   </button>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10px] font-medium shadow-2xs">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
                     <span>Anexado</span>
                   </span>
                 </div>
@@ -509,19 +509,19 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
             <span>
               Fundamentos do ITIL 4 — Green Treinamentos (gestão moderna de serviços de TI e práticas ágeis)
             </span>
-            <div className="no-print mt-1.5">
+            <div className="no-print mt-1">
               {attachments['itil4'] && (
-                <div className="inline-flex items-center gap-2 flex-wrap">
+                <div className="inline-flex items-center gap-1.5 flex-wrap">
                   <button
                     type="button"
                     onClick={() => onOpenView(attachments['itil4'])}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white text-[11px] font-semibold shadow-2xs hover:shadow-xs border border-blue-500/30 transition-all duration-150 cursor-pointer active:scale-95 group"
                   >
-                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Visualizar Certificado ITIL 4</span>
+                    <Eye className="w-3 h-3 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Ver Certificado ITIL 4</span>
                   </button>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10px] font-medium shadow-2xs">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
                     <span>Anexado</span>
                   </span>
                 </div>
@@ -534,19 +534,19 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
             <span>
               Bootcamp MS-900: Microsoft 365 Fundamentals — Green Treinamentos (serviços de nuvem, segurança e conformidade M365)
             </span>
-            <div className="no-print mt-1.5">
+            <div className="no-print mt-1">
               {attachments['ms900'] && (
-                <div className="inline-flex items-center gap-2 flex-wrap">
+                <div className="inline-flex items-center gap-1.5 flex-wrap">
                   <button
                     type="button"
                     onClick={() => onOpenView(attachments['ms900'])}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white text-[11px] font-semibold shadow-2xs hover:shadow-xs border border-blue-500/30 transition-all duration-150 cursor-pointer active:scale-95 group"
                   >
-                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Visualizar Certificado MS-900</span>
+                    <Eye className="w-3 h-3 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Ver Certificado MS-900</span>
                   </button>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10px] font-medium shadow-2xs">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
                     <span>Anexado</span>
                   </span>
                 </div>
@@ -559,19 +559,19 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
             <span>
               Formação Profissional — SENAI (qualificação técnica e formação profissional)
             </span>
-            <div className="no-print mt-1.5">
+            <div className="no-print mt-1">
               {attachments['senai'] && (
-                <div className="inline-flex items-center gap-2 flex-wrap">
+                <div className="inline-flex items-center gap-1.5 flex-wrap">
                   <button
                     type="button"
                     onClick={() => onOpenView(attachments['senai'])}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white text-[11px] font-semibold shadow-2xs hover:shadow-xs border border-blue-500/30 transition-all duration-150 cursor-pointer active:scale-95 group"
                   >
-                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Visualizar Certificado SENAI</span>
+                    <Eye className="w-3 h-3 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Ver Certificado SENAI</span>
                   </button>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10px] font-medium shadow-2xs">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
                     <span>Anexado</span>
                   </span>
                 </div>
@@ -585,17 +585,17 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
             .map((item) => (
               <li key={item.id} className="list-disc list-outside ml-4 leading-normal">
                 <span>{item.targetTitle}</span>
-                <div className="no-print mt-1.5 inline-flex items-center gap-2 flex-wrap">
+                <div className="no-print mt-1 inline-flex items-center gap-1.5 flex-wrap">
                   <button
                     type="button"
                     onClick={() => onOpenView(item)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-800 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white text-xs font-semibold shadow-xs hover:shadow-md hover:shadow-blue-700/25 border border-blue-500/30 transition-all duration-200 cursor-pointer active:scale-95 group"
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white text-[11px] font-semibold shadow-2xs hover:shadow-xs border border-blue-500/30 transition-all duration-150 cursor-pointer active:scale-95 group"
                   >
-                    <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:scale-110 transition-transform" />
-                    <span>Visualizar ({item.fileName})</span>
+                    <Eye className="w-3 h-3 text-blue-200 group-hover:scale-110 transition-transform" />
+                    <span>Ver ({item.fileName})</span>
                   </button>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[11px] font-semibold tracking-wide shadow-2xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-emerald-800 text-[10px] font-medium shadow-2xs">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
                     <span>Anexado</span>
                   </span>
                 </div>
