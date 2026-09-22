@@ -1,0 +1,12 @@
+/* Keep the letters available in the curriculum body without duplicating them in the sticky top bar. */
+@media (min-width: 768px) {
+  header.no-print > div > div.hidden.md\:flex > button:nth-child(1),
+  header.no-print > div > div.hidden.md\:flex > button:nth-child(2) {
+    display: none !important;
+  }
+}
+
+/* The same two duplicate actions are hidden inside the mobile actions menu. */
+header.no-print > div + div > div.grid.grid-cols-2:first-of-type {
+  display: none !important;
+}
