@@ -168,11 +168,15 @@ São Paulo, SP`;
 
         {/* Attachment Banner if attached */}
         {attachment && (
-          <div className="px-6 py-2.5 bg-emerald-50 border-b border-emerald-200 flex items-center justify-between gap-3 text-xs text-emerald-900">
-            <div className="flex items-center gap-2 truncate">
-              <Paperclip className="w-4 h-4 text-emerald-600 shrink-0" />
+          <div className="px-5 sm:px-6 py-2.5 bg-gradient-to-r from-emerald-50/95 via-teal-50/70 to-slate-50 border-b border-emerald-200/80 flex flex-wrap items-center justify-between gap-2.5 text-xs text-slate-800 shrink-0 shadow-2xs">
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-6 h-6 rounded-md bg-emerald-600/10 border border-emerald-500/20 text-emerald-700 flex items-center justify-center shrink-0">
+                <Paperclip className="w-3.5 h-3.5" />
+              </div>
               <span className="truncate">
-                <strong>Arquivo original anexado:</strong> {attachment.fileName} ({attachment.fileSize || 'Documento'})
+                <strong className="text-slate-900 font-bold">Arquivo original anexado:</strong>{' '}
+                <span className="font-medium text-slate-700">{attachment.fileName}</span>{' '}
+                <span className="text-[11px] text-slate-500 font-mono">({attachment.fileSize || 'PDF'})</span>
               </span>
             </div>
             {onOpenViewAttachment && (
@@ -182,9 +186,11 @@ São Paulo, SP`;
                   onClose();
                   onOpenViewAttachment(attachment);
                 }}
-                className="underline font-semibold text-emerald-700 hover:text-emerald-900 shrink-0 cursor-pointer"
+                className="group relative inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-500 hover:via-teal-500 hover:to-emerald-600 text-white font-semibold text-[11.5px] shadow-sm shadow-emerald-500/30 hover:shadow-md hover:shadow-emerald-500/40 border border-emerald-400/30 transition-all duration-200 cursor-pointer active:scale-95"
               >
-                Visualizar Arquivo
+                <Eye className="w-3.5 h-3.5 text-emerald-100 group-hover:text-white transition-colors" />
+                <span className="tracking-tight">Ver Arquivo Anexo</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse ml-0.5" />
               </button>
             )}
           </div>

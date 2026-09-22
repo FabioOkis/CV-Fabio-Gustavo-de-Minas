@@ -173,16 +173,20 @@ Pinheiro Neto Advogados · São Paulo, SP`;
         </div>
 
         {/* Link / Notice to Attachments */}
-        <div className="px-5 sm:px-6 py-2.5 bg-blue-50/90 border-b border-blue-200 flex flex-wrap items-center justify-between gap-2 text-xs text-blue-900 shrink-0">
+        <div className="px-5 sm:px-6 py-2.5 bg-gradient-to-r from-blue-50/95 via-indigo-50/70 to-slate-50 border-b border-blue-200/80 flex flex-wrap items-center justify-between gap-2.5 text-xs text-slate-800 shrink-0 shadow-2xs">
           <div className="flex items-center gap-2 min-w-0">
-            <Paperclip className="w-4 h-4 text-blue-700 shrink-0" />
+            <div className="w-6 h-6 rounded-md bg-blue-600/10 border border-blue-500/20 text-blue-700 flex items-center justify-center shrink-0">
+              <Paperclip className="w-3.5 h-3.5" />
+            </div>
             {attachment ? (
               <span className="truncate">
-                <strong className="text-emerald-800">Documento original anexado:</strong> {attachment.fileName} ({attachment.fileSize || 'Arquivo'})
+                <strong className="text-slate-900 font-bold">Documento original anexado:</strong>{' '}
+                <span className="font-medium text-slate-700">{attachment.fileName}</span>{' '}
+                <span className="text-[11px] text-slate-500 font-mono">({attachment.fileSize || 'PDF'})</span>
               </span>
             ) : (
               <span>
-                <strong>Documentos &amp; Anexos:</strong> Você pode visualizar ou anexar o PDF assinado da carta.
+                <strong className="text-slate-900 font-bold">Documentos &amp; Anexos:</strong> Você pode visualizar ou anexar o PDF assinado da carta.
               </span>
             )}
           </div>
@@ -195,10 +199,11 @@ Pinheiro Neto Advogados · São Paulo, SP`;
                   onClose();
                   onOpenViewAttachment(attachment);
                 }}
-                className="inline-flex items-center gap-1 px-2 py-1 rounded bg-blue-600 hover:bg-blue-700 text-white font-semibold cursor-pointer text-[11px]"
+                className="group relative inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-500 hover:via-blue-600 hover:to-indigo-600 text-white font-semibold text-[11.5px] shadow-sm shadow-blue-500/30 hover:shadow-md hover:shadow-blue-500/40 border border-blue-400/30 transition-all duration-200 cursor-pointer active:scale-95"
               >
-                <Eye className="w-3 h-3" />
-                <span>Ver Arquivo Anexo</span>
+                <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:text-white transition-colors" />
+                <span className="tracking-tight">Ver Arquivo Anexo</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
               </button>
             )}
             <button
@@ -207,10 +212,10 @@ Pinheiro Neto Advogados · São Paulo, SP`;
                 onClose();
                 onOpenAttachmentsDrawer();
               }}
-              className="inline-flex items-center gap-1 text-blue-700 hover:text-blue-900 font-semibold underline cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/90 hover:bg-white text-slate-700 hover:text-blue-700 border border-slate-300/80 hover:border-blue-300 font-medium text-[11.5px] transition-all cursor-pointer shadow-2xs"
             >
-              <span>Abrir Central de Anexos</span>
-              <ExternalLink className="w-3 h-3" />
+              <span>Central de Anexos</span>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-400 hover:text-blue-600" />
             </button>
           </div>
         </div>
