@@ -84,28 +84,26 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
         </address>
 
         {/* Executive Document & Letters Hub (print:hidden) */}
-        <div className="mt-4 mb-1 print:hidden w-full max-w-2xl mx-auto">
-          <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-2.5 sm:p-3 shadow-2xs">
-            <div className="flex items-center justify-between px-1 mb-2 text-[10px] sm:text-[10.5px] font-semibold uppercase tracking-wider text-slate-500">
-              <span className="flex items-center gap-1.5 font-bold text-slate-700">
-                <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
-                Documentos &amp; Cartas Oficiais
-              </span>
+        <div className="mt-3.5 mb-1 print:hidden flex justify-center">
+          <div className="bg-slate-50 border border-slate-200/90 rounded-xl p-2 sm:p-2.5 shadow-2xs inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1.5 px-1 text-[10.5px] font-bold uppercase tracking-wider text-slate-700 shrink-0">
+              <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+              <span>Documentos &amp; Cartas Oficiais:</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-2">
               {/* Carta de Apresentação */}
               {onOpenCoverLetter && (
                 <button
                   type="button"
                   onClick={onOpenCoverLetter}
-                  className="group w-full inline-flex items-center justify-center sm:justify-start gap-2 px-3 py-2 rounded-lg bg-white hover:bg-blue-50/60 text-slate-800 hover:text-blue-900 border border-slate-200/90 hover:border-blue-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+                  className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white hover:bg-blue-50/60 text-slate-800 hover:text-blue-900 border border-slate-200/90 hover:border-blue-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
                   title="Visualizar Carta de Apresentação Profissional"
                 >
-                  <div className="w-6 h-6 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <div className="w-5.5 h-5.5 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                     <FileText className="w-3.5 h-3.5" />
                   </div>
-                  <span className="truncate">Carta de Apresentação</span>
+                  <span>Carta de Apresentação</span>
                 </button>
               )}
 
@@ -114,13 +112,13 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                 <button
                   type="button"
                   onClick={onOpenRecommendationLetter}
-                  className="group w-full inline-flex items-center justify-center sm:justify-start gap-2 px-3 py-2 rounded-lg bg-white hover:bg-amber-50/60 text-slate-800 hover:text-amber-900 border border-slate-200/90 hover:border-amber-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+                  className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white hover:bg-amber-50/60 text-slate-800 hover:text-amber-900 border border-slate-200/90 hover:border-amber-300 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
                   title="Visualizar Carta de Recomendação (Pinheiro Neto Advogados)"
                 >
-                  <div className="w-6 h-6 rounded-md bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                  <div className="w-5.5 h-5.5 rounded-md bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 group-hover:bg-amber-600 group-hover:text-white transition-colors">
                     <Award className="w-3.5 h-3.5" />
                   </div>
-                  <span className="truncate">Carta de Recomendação</span>
+                  <span>Carta de Recomendação</span>
                 </button>
               )}
             </div>
