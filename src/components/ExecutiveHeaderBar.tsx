@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Printer,
-  Paperclip,
   Copy,
   Check,
   MessageSquare,
@@ -130,21 +129,6 @@ IDIOMAS
 
         {/* Centered Action Buttons for Desktop (Positioned to clear left identity) */}
         <div className="hidden md:flex items-center justify-center gap-1.5 lg:gap-2 absolute left-[55%] -translate-x-1/2 pointer-events-auto">
-          {/* Anexos button */}
-          <button
-            type="button"
-            onClick={onOpenAttachmentsDrawer}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
-            title="Ver e gerenciar diplomas e certificados anexados"
-          >
-            <Paperclip className="w-3.5 h-3.5" />
-            <span>Anexos</span>
-            <span className="bg-blue-800 text-white text-[10px] px-1.5 py-0.2 rounded-full font-mono">
-              {totalAttachments}
-            </span>
-          </button>
-
-
           {/* Imprimir / PDF */}
           <button
             type="button"
@@ -216,20 +200,6 @@ IDIOMAS
 
         {/* Right actions - Mobile View */}
         <div className="flex md:hidden items-center gap-1.5 shrink-0 ml-auto">
-          {/* Anexos Quick Button on Mobile */}
-          <button
-            type="button"
-            onClick={onOpenAttachmentsDrawer}
-            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
-            title="Ver anexos"
-          >
-            <Paperclip className="w-3.5 h-3.5" />
-            <span>Anexos</span>
-            <span className="bg-blue-800 text-white text-[10px] px-1.5 py-0.2 rounded-full font-mono">
-              {totalAttachments}
-            </span>
-          </button>
-
           {/* Menu / Ações Toggle */}
           <button
             type="button"
