@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ShieldCheck,
   Lock,
@@ -11,8 +11,30 @@ import {
   ExternalLink,
   MessageSquare,
   UserPlus,
+  Eye,
 } from 'lucide-react';
 import { downloadVCard } from '../utils/vcard';
+
+// ─── Visit Counter ──────────────────────────────────────────────────────────
+const VISIT_KEY = 'cv_visit_count';
+const SESSION_KEY = 'cv_visit_counted';
+
+function getVisitCount(): number {
+  const raw = localStorage.getItem(VISIT_KEY);
+  return raw ? parseInt(raw, 10) : 0;
+}
+
+function incrementVisit(): number {
+  // Only increment once per browser session
+  if (sessionStorage.getItem(SESSION_KEY)) {
+    return getVisitCount();
+  }
+  const next = getVisitCount() + 1;
+  localStorage.setItem(VISIT_KEY, String(next));
+  sessionStorage.setItem(SESSION_KEY, '1');
+  return next;
+}
+// ────────────────────────────────────────────────────────────────────────────
 
 interface ExecutiveFooterProps {
   onOpenCoverLetter?: () => void;
@@ -28,6 +50,13 @@ export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
   onRequestAdmin: _onRequestAdmin,
 }) => {
   const currentYear = new Date().getFullYear();
+  const [visitCount, setVisitCount] = useState<number>(0);
+  const [showVisitPop, setShowVisitPop] = useState(false);
+
+  useEffect(() => {
+    const count = incrementVisit();
+    setVisitCount(count);
+  }, []);
 
   return (
     <footer className="no-print bg-slate-900 text-slate-300 border-t border-slate-800 mt-12 py-10 px-4 sm:px-6 transition-colors">
@@ -181,6 +210,43 @@ export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
             >
               <UserPlus className="w-3.5 h-3.5 text-amber-400" />
               <span>vCard</span>
+            </button>
+
+            {/* Visit Counter Button */}
+            <button
+              type="button"
+              onClick={() => setShowVisitPop(v => !v)}
+              className="relative inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-violet-950/70 hover:bg-violet-900/80 text-violet-300 border border-violet-800/60 transition-colors whitespace-nowrap cursor-pointer group"
+              title="Visitas ao currículo"
+            >
+              <Eye className="w-3.5 h-3.5 text-violet-400" />
+              <span className="font-mono tabular-nums">
+                {visitCount.toLocaleString('pt-BR')}
+              </span>
+              <span className="hidden sm:inline text-[10px] text-violet-400/80 font-normal">visitas</span>
+
+              {/* Tooltip Popover */}
+              {showVisitPop && (
+                <div
+                  className="absolute bottom-full mb-2 right-0 z-50 w-48 rounded-xl bg-slate-900 border border-violet-800/60 shadow-2xl p-3 text-left animate-in fade-in slide-in-from-bottom-1 duration-150"
+                  onClick={e => e.stopPropagation()}
+                >
+                  <div className="flex items-center gap-1.5 mb-1.5">
+                    <Eye className="w-3.5 h-3.5 text-violet-400" />
+                    <span className="text-[11px] font-bold text-violet-200 uppercase tracking-wide">Contador de Visitas</span>
+                  </div>
+                  <p className="text-[11px] text-slate-400 leading-relaxed">
+                    Este currículo foi visualizado
+                    <span className="mx-1 font-mono font-bold text-violet-300">
+                      {visitCount.toLocaleString('pt-BR')}
+                    </span>
+                    {visitCount === 1 ? 'vez' : 'vezes'} neste dispositivo.
+                  </p>
+                  <p className="mt-1.5 text-[10px] text-slate-500">
+                    Contagem salva localmente via localStorage.
+                  </p>
+                </div>
+              )}
             </button>
           </div>
         </div>
