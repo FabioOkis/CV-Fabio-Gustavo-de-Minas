@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ShieldCheck,
   Lock,
@@ -12,27 +12,23 @@ import {
   MessageSquare,
   UserPlus,
   Eye,
+  Globe,
 } from 'lucide-react';
 import { downloadVCard } from '../utils/vcard';
 
-// ─── Visit Counter ──────────────────────────────────────────────────────────
-const VISIT_KEY = 'cv_visit_count';
-const SESSION_KEY = 'cv_visit_counted';
+// ─── Global Visit Counter ───────────────────────────────────────────────────
+const GLOBAL_KEY = 'cv-fabio-minas-views';
+const CACHE_KEY = 'cv_global_visits_cache';
+const SESSION_KEY = 'cv_global_visit_counted';
+const API_BASE = 'https://countapi.mileshilliard.com/api/v1';
 
-function getVisitCount(): number {
-  const raw = localStorage.getItem(VISIT_KEY);
-  return raw ? parseInt(raw, 10) : 0;
-}
-
-function incrementVisit(): number {
-  // Only increment once per browser session
-  if (sessionStorage.getItem(SESSION_KEY)) {
-    return getVisitCount();
+function getCachedCount(): number {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    return raw ? parseInt(raw, 10) : 0;
+  } catch {
+    return 0;
   }
-  const next = getVisitCount() + 1;
-  localStorage.setItem(VISIT_KEY, String(next));
-  sessionStorage.setItem(SESSION_KEY, '1');
-  return next;
 }
 // ────────────────────────────────────────────────────────────────────────────
 
@@ -46,17 +42,104 @@ interface ExecutiveFooterProps {
 export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
   onOpenCoverLetter,
   onOpenRecommendationLetter,
-  isAdmin: _isAdmin,
+  isAdmin = false,
   onRequestAdmin: _onRequestAdmin,
 }) => {
   const currentYear = new Date().getFullYear();
-  const [visitCount, setVisitCount] = useState<number>(0);
+  const [visitCount, setVisitCount] = useState<number>(() => getCachedCount());
   const [showVisitPop, setShowVisitPop] = useState(false);
+  const popoverRef = useRef<HTMLDivElement>(null);
+
+  // Close popover when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (popoverRef.current && !popoverRef.current.contains(e.target as Node)) {
+        setShowVisitPop(false);
+      }
+    }
+    if (showVisitPop) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showVisitPop]);
 
   useEffect(() => {
-    const count = incrementVisit();
-    setVisitCount(count);
+    let isMounted = true;
+
+    async function recordVisit() {
+      try {
+        const hasSessionCounted = sessionStorage.getItem(SESSION_KEY);
+        // Only increment once per session; page refreshes fetch current count
+        const endpoint = hasSessionCounted ? 'get' : 'hit';
+        const res = await fetch(`${API_BASE}/${endpoint}/${GLOBAL_KEY}`, {
+          cache: 'no-store',
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data && typeof data.value === 'number') {
+            if (isMounted) {
+              setVisitCount(data.value);
+            }
+            try {
+              localStorage.setItem(CACHE_KEY, String(data.value));
+              sessionStorage.setItem(SESSION_KEY, 'true');
+            } catch {
+              // ignore storage errors
+            }
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Contador global: falha ao sincronizar online, usando cache.', err);
+      }
+
+      // Fallback local se a API estiver temporariamente inacessível
+      const cached = getCachedCount();
+      if (cached > 0 && isMounted) {
+        setVisitCount(cached);
+      }
+    }
+
+    recordVisit();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
+
+  const handleAdminSetCount = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const promptVal = window.prompt(
+      'Definir número global de visitas:',
+      String(visitCount)
+    );
+    if (!promptVal) return;
+    const num = parseInt(promptVal.trim(), 10);
+    if (isNaN(num) || num < 0) {
+      alert('Por favor, informe um número válido maior ou igual a zero.');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/set/${GLOBAL_KEY}?value=${num}`, {
+        cache: 'no-store',
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const finalVal = typeof data.value === 'number' ? data.value : num;
+        setVisitCount(finalVal);
+        localStorage.setItem(CACHE_KEY, String(finalVal));
+        alert(`Contador atualizado para ${finalVal.toLocaleString('pt-BR')} visitas!`);
+      } else {
+        alert('Erro ao atualizar contador no servidor.');
+      }
+    } catch {
+      alert('Falha na conexão com o servidor de contagem.');
+    }
+  };
 
   return (
     <footer className="no-print bg-slate-900 text-slate-300 border-t border-slate-800 mt-12 py-10 px-4 sm:px-6 transition-colors">
@@ -213,41 +296,66 @@ export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
             </button>
 
             {/* Visit Counter Button */}
-            <button
-              type="button"
-              onClick={() => setShowVisitPop(v => !v)}
-              className="relative inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-violet-950/70 hover:bg-violet-900/80 text-violet-300 border border-violet-800/60 transition-colors whitespace-nowrap cursor-pointer group"
-              title="Visitas ao currículo"
-            >
-              <Eye className="w-3.5 h-3.5 text-violet-400" />
-              <span className="font-mono tabular-nums">
-                {visitCount.toLocaleString('pt-BR')}
-              </span>
-              <span className="hidden sm:inline text-[10px] text-violet-400/80 font-normal">visitas</span>
+            <div className="relative inline-flex" ref={popoverRef}>
+              <button
+                type="button"
+                onClick={() => setShowVisitPop(v => !v)}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-violet-950/70 hover:bg-violet-900/80 text-violet-300 border border-violet-800/60 transition-colors whitespace-nowrap cursor-pointer group"
+                title="Visitas ao currículo (Acessos globais em tempo real)"
+              >
+                <Eye className="w-3.5 h-3.5 text-violet-400 group-hover:text-violet-300 transition-colors" />
+                <span className="font-mono tabular-nums font-semibold">
+                  {visitCount > 0 ? visitCount.toLocaleString('pt-BR') : '...'}
+                </span>
+                <span className="hidden sm:inline text-[10px] text-violet-400/80 font-normal">visitas</span>
+              </button>
 
               {/* Tooltip Popover */}
               {showVisitPop && (
                 <div
-                  className="absolute bottom-full mb-2 right-0 z-50 w-48 rounded-xl bg-slate-900 border border-violet-800/60 shadow-2xl p-3 text-left animate-in fade-in slide-in-from-bottom-1 duration-150"
+                  className="absolute bottom-full mb-2 right-0 z-50 w-56 rounded-xl bg-slate-900 border border-violet-800/60 shadow-2xl p-3 text-left animate-in fade-in slide-in-from-bottom-1 duration-150"
                   onClick={e => e.stopPropagation()}
                 >
-                  <div className="flex items-center gap-1.5 mb-1.5">
-                    <Eye className="w-3.5 h-3.5 text-violet-400" />
-                    <span className="text-[11px] font-bold text-violet-200 uppercase tracking-wide">Contador de Visitas</span>
+                  <div className="flex items-center justify-between gap-1.5 mb-1.5 pb-1.5 border-b border-violet-900/50">
+                    <div className="flex items-center gap-1.5">
+                      <Globe className="w-3.5 h-3.5 text-violet-400" />
+                      <span className="text-[11px] font-bold text-violet-200 uppercase tracking-wide">
+                        Acessos Globais
+                      </span>
+                    </div>
+                    <span className="flex h-2 w-2 relative" title="Sincronizado">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
                   </div>
-                  <p className="text-[11px] text-slate-400 leading-relaxed">
-                    Este currículo foi visualizado
+
+                  <p className="text-[11px] text-slate-300 leading-relaxed">
+                    Este currículo recebeu
                     <span className="mx-1 font-mono font-bold text-violet-300">
                       {visitCount.toLocaleString('pt-BR')}
                     </span>
-                    {visitCount === 1 ? 'vez' : 'vezes'} neste dispositivo.
+                    {visitCount === 1 ? 'visita' : 'visitas'} no total.
                   </p>
-                  <p className="mt-1.5 text-[10px] text-slate-500">
-                    Contagem salva localmente via localStorage.
+
+                  <p className="mt-1.5 text-[10px] text-slate-400">
+                    Contagem sincronizada em nuvem (agregando acessos de todos os dispositivos e locais).
                   </p>
+
+                  {isAdmin && (
+                    <div className="mt-2.5 pt-2 border-t border-slate-800 flex items-center justify-between">
+                      <span className="text-[9.5px] text-amber-400/90 font-mono">Modo Admin</span>
+                      <button
+                        type="button"
+                        onClick={handleAdminSetCount}
+                        className="text-[10px] px-2 py-0.5 rounded bg-violet-900/60 hover:bg-violet-800 text-violet-200 border border-violet-700/60 cursor-pointer transition-colors"
+                      >
+                        Ajustar
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
-            </button>
+            </div>
           </div>
         </div>
       </div>
