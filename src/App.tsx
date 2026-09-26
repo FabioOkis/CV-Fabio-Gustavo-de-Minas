@@ -43,9 +43,29 @@ export default function App() {
   const [recommendationLetterOpen, setRecommendationLetterOpen] = useState(false);
   const [adminModalOpen, setAdminModalOpen] = useState(false);
   const [lang, setLang] = useState<'pt' | 'en'>('pt');
+  const [certificateBorder, setCertificateBorder] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem('cv_certificate_border');
+      return saved !== null ? saved === 'true' : true;
+    } catch {
+      return true;
+    }
+  });
 
   const handleToggleLang = () => {
     setLang((prev) => (prev === 'pt' ? 'en' : 'pt'));
+  };
+
+  const handleToggleCertificateBorder = () => {
+    setCertificateBorder((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('cv_certificate_border', String(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
   };
 
   // Load attachments on initial mount
@@ -136,14 +156,17 @@ export default function App() {
         onOpenRecommendationLetter={() => setRecommendationLetterOpen(true)}
         isAdmin={isAdmin}
         onRequestAdmin={handleRequestAdmin}
+        certificateBorder={certificateBorder}
+        onToggleCertificateBorder={handleToggleCertificateBorder}
       />
 
       {/* Main Container / Paper Sheet */}
-      <main className="flex-1 py-4 sm:py-10 px-2 sm:px-4 print:p-0 print:m-0">
+      <main className="flex-1 py-4 sm:py-10 px-2 sm:px-4 print:p-0 print:m-0 flex justify-center">
         <CurriculumLanding
           attachments={attachments}
           lang={lang}
           isAdmin={isAdmin}
+          showCertificateBorder={certificateBorder}
           onOpenAttach={handleOpenAttach}
           onOpenView={handleOpenView}
           onOpenCoverLetter={() => setCoverLetterOpen(true)}

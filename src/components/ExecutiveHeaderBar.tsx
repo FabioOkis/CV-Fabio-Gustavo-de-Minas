@@ -27,6 +27,8 @@ interface ExecutiveHeaderBarProps {
   onOpenRecommendationLetter: () => void;
   isAdmin?: boolean;
   onRequestAdmin?: () => void;
+  certificateBorder?: boolean;
+  onToggleCertificateBorder?: () => void;
 }
 
 export const ExecutiveHeaderBar: React.FC<ExecutiveHeaderBarProps> = ({
@@ -38,6 +40,8 @@ export const ExecutiveHeaderBar: React.FC<ExecutiveHeaderBarProps> = ({
   onOpenRecommendationLetter,
   isAdmin = false,
   onRequestAdmin,
+  certificateBorder = true,
+  onToggleCertificateBorder,
 }) => {
   const [copied, setCopied] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -135,6 +139,34 @@ IDIOMAS
 
         {/* Centered Action Buttons for Desktop (Positioned to clear left identity) */}
         <div className="hidden md:flex items-center justify-center gap-1.5 lg:gap-2 absolute left-1/2 -translate-x-1/2 pointer-events-auto">
+          {/* Borda Oficial D4Sign / Certificado */}
+          {onToggleCertificateBorder && (
+            <button
+              type="button"
+              onClick={onToggleCertificateBorder}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold transition-all cursor-pointer ${
+                certificateBorder
+                  ? 'bg-gradient-to-r from-emerald-950/90 via-slate-900 to-cyan-950/90 border-emerald-500/80 text-emerald-300 hover:border-emerald-400 shadow-xs'
+                  : 'bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 border-slate-700'
+              }`}
+              title={
+                certificateBorder
+                  ? 'Borda Oficial D4Sign ATIVA (clique para alternar)'
+                  : 'Ativar Borda Oficial D4Sign'
+              }
+            >
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  certificateBorder
+                    ? 'bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse'
+                    : 'bg-slate-500'
+                }`}
+              />
+              <span className="hidden xl:inline">Borda D4Sign</span>
+              <span className="xl:hidden">Borda</span>
+            </button>
+          )}
+
           {/* Imprimir / PDF */}
           <button
             type="button"
@@ -294,6 +326,35 @@ IDIOMAS
               </div>
             </button>
           </div>
+
+          {/* Toggle Borda Oficial D4Sign (Mobile) */}
+          {onToggleCertificateBorder && (
+            <button
+              type="button"
+              onClick={() => {
+                onToggleCertificateBorder();
+              }}
+              className={`w-full flex items-center justify-between p-2.5 mb-2.5 rounded-lg border text-xs font-semibold transition-all cursor-pointer ${
+                certificateBorder
+                  ? 'bg-gradient-to-r from-emerald-950/80 via-slate-900 to-cyan-950/80 border-emerald-500/70 text-emerald-300'
+                  : 'bg-slate-800/80 text-slate-300 border-slate-700'
+              }`}
+            >
+              <div className="flex items-center gap-2">
+                <span
+                  className={`w-2.5 h-2.5 rounded-full ${
+                    certificateBorder ? 'bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse' : 'bg-slate-500'
+                  }`}
+                />
+                <span>Borda Oficial D4Sign</span>
+              </div>
+              <span className={`text-[10px] px-2 py-0.5 rounded-full ${
+                certificateBorder ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-slate-700 text-slate-400'
+              }`}>
+                {certificateBorder ? 'Ativada' : 'Oculta'}
+              </span>
+            </button>
+          )}
 
           {/* Quick Actions Row */}
           <div className="grid grid-cols-2 gap-2 mb-2.5">
