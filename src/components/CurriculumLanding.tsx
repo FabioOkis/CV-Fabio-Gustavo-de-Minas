@@ -10,7 +10,6 @@ interface CurriculumLandingProps {
   attachments: Record<string, AttachmentItem>;
   lang?: 'pt' | 'en';
   isAdmin?: boolean;
-  showCertificateBorder?: boolean;
   onOpenAttach: (
     targetId: string,
     targetTitle: string,
@@ -26,7 +25,6 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
   attachments,
   lang = 'pt',
   isAdmin = false,
-  showCertificateBorder = true,
   onOpenAttach,
   onOpenView,
   onOpenCoverLetter,
@@ -51,23 +49,9 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
   ];
   return (
     <GuillocheCertificateBorder
-      enabled={showCertificateBorder}
       className="w-full max-w-[860px] mx-auto sm:rounded-xs print:rounded-none font-sans"
     >
-      <div className={`w-full text-slate-900 font-sans ${!showCertificateBorder ? 'bg-white shadow-xl sm:rounded-sm border border-slate-200/80 px-6 py-8 sm:px-12 sm:py-12 print:shadow-none print:border-none print:p-0' : ''}`}>
-        {/* Verification banner when border is active */}
-        {showCertificateBorder && (
-          <div className="mb-4 pb-2.5 border-b border-slate-200/80 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-1 select-none print:text-[9.5px]">
-            <div className="flex items-center gap-1.5 font-medium text-slate-600">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981] inline-block" />
-              <span>Documento com Trilha de Autenticidade &amp; Conformidade</span>
-            </div>
-            <div className="text-[10px] text-slate-400 font-mono">
-              Validação Digital • Padrão D4Sign &amp; NTP.br
-            </div>
-          </div>
-        )}
-
+      <div className="w-full text-slate-900 font-sans">
         {/* ================= HEADER ================= */}
         <header className="text-center pb-3">
         <h1 className="text-xl sm:text-[26px] font-bold tracking-normal text-slate-900 leading-tight uppercase font-sans">

@@ -1,9 +1,7 @@
-import React, { useId } from 'react';
+import React, { useMemo } from 'react';
 
 interface GuillocheCertificateBorderProps {
   children: React.ReactNode;
-  enabled?: boolean;
-  showWatermark?: boolean;
   className?: string;
 }
 
@@ -27,6 +25,7 @@ function generateWavePath(phase: number, inverted: boolean = false): string {
 
 /**
  * Generates vertical wave path: swaps X and Y.
+ * Width = 16px, Period = 24px, Amplitude = 6.2px, Center = 8px.
  */
 function generateVerticalWavePath(phase: number, inverted: boolean = false): string {
   const points: string[] = [];
@@ -44,201 +43,105 @@ function generateVerticalWavePath(phase: number, inverted: boolean = false): str
 
 export const GuillocheCertificateBorder: React.FC<GuillocheCertificateBorderProps> = ({
   children,
-  enabled = true,
-  showWatermark = true,
   className = '',
 }) => {
-  const rawId = useId();
-  const uid = rawId.replace(/[^a-zA-Z0-9]/g, '_');
-  const gradHId = `d4_grad_h_${uid}`;
-  const gradDiagId = `d4_grad_diag_${uid}`;
-  const patternHId = `d4_pat_h_${uid}`;
-  const patternVId = `d4_pat_v_${uid}`;
-  const maskTopId = `d4_mask_top_${uid}`;
-  const maskBottomId = `d4_mask_bot_${uid}`;
-  const maskLeftId = `d4_mask_l_${uid}`;
-  const maskRightId = `d4_mask_r_${uid}`;
+  // Generate self-contained data URIs for horizontal and vertical guilloché masks
+  const { dataUriH, dataUriV } = useMemo(() => {
+    const phases = [0, 3, 6, 9, 12, 15, 18, 21];
 
-  // If disabled, render normal children with standard container styling
-  if (!enabled) {
-    return <div className={`relative ${className}`}>{children}</div>;
-  }
+    const hPaths = phases
+      .map(
+        (p) =>
+          `<path d='${generateWavePath(p, false)}' fill='none' stroke='black' stroke-width='0.8'/><path d='${generateWavePath(p, true)}' fill='none' stroke='black' stroke-width='0.8'/>`
+      )
+      .join('');
+    const svgH = `<svg xmlns='http://www.w3.org/2000/svg' width='24' height='16' viewBox='0 0 24 16'><line x1='0' y1='0.5' x2='24' y2='0.5' stroke='black' stroke-width='0.8'/><line x1='0' y1='15.5' x2='24' y2='15.5' stroke='black' stroke-width='0.8'/>${hPaths}</svg>`;
 
-  // 8 forward and 8 reverse phase-shifted waves for diamond guilloché mesh
-  const phases = [0, 3, 6, 9, 12, 15, 18, 21];
+    const vPaths = phases
+      .map(
+        (p) =>
+          `<path d='${generateVerticalWavePath(p, false)}' fill='none' stroke='black' stroke-width='0.8'/><path d='${generateVerticalWavePath(p, true)}' fill='none' stroke='black' stroke-width='0.8'/>`
+      )
+      .join('');
+    const svgV = `<svg xmlns='http://www.w3.org/2000/svg' width='16' height='24' viewBox='0 0 16 24'><line x1='0.5' y1='0' x2='0.5' y2='24' stroke='black' stroke-width='0.8'/><line x1='15.5' y1='0' x2='15.5' y2='24' stroke='black' stroke-width='0.8'/>${vPaths}</svg>`;
+
+    return {
+      dataUriH: `data:image/svg+xml,${encodeURIComponent(svgH)}`,
+      dataUriV: `data:image/svg+xml,${encodeURIComponent(svgV)}`,
+    };
+  }, []);
 
   return (
     <div
-      className={`relative bg-white text-slate-900 shadow-2xl transition-all duration-300 print:shadow-none print:m-0 print:p-0 ${className}`}
+      className={`relative bg-white text-slate-900 shadow-xl print:shadow-none print:m-0 print:p-0 ${className}`}
       style={{
         boxSizing: 'border-box',
       }}
     >
-      {/* ================= SVG DEFS & MASKS ================= */}
-      <svg
-        className="absolute w-0 h-0 overflow-hidden pointer-events-none"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <defs>
-          {/* Authentic D4Sign Signature Certificate Gradient: Emerald Green to Azure Blue */}
-          <linearGradient id={gradHId} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#10b981" />
-            <stop offset="18%" stopColor="#059669" />
-            <stop offset="48%" stopColor="#06b6d4" />
-            <stop offset="78%" stopColor="#0ea5e9" />
-            <stop offset="100%" stopColor="#0284c7" />
-          </linearGradient>
-
-          {/* Diagonal Gradient for corners and inner frame line */}
-          <linearGradient id={gradDiagId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#10b981" />
-            <stop offset="25%" stopColor="#059669" />
-            <stop offset="55%" stopColor="#06b6d4" />
-            <stop offset="85%" stopColor="#0ea5e9" />
-            <stop offset="100%" stopColor="#0284c7" />
-          </linearGradient>
-
-          {/* Horizontal Guilloché Mask Pattern (White strokes on black background) */}
-          <pattern
-            id={patternHId}
-            width="24"
-            height="16"
-            patternUnits="userSpaceOnUse"
-          >
-            <rect width="24" height="16" fill="#000000" />
-            {/* Guide outer boundaries */}
-            <line x1="0" y1="0.5" x2="24" y2="0.5" stroke="#ffffff" strokeWidth="0.8" />
-            <line x1="0" y1="15.5" x2="24" y2="15.5" stroke="#ffffff" strokeWidth="0.8" />
-
-            {/* Interlaced diamond weave waves */}
-            {phases.map((phase) => (
-              <React.Fragment key={`h_${phase}`}>
-                <path
-                  d={generateWavePath(phase, false)}
-                  fill="none"
-                  stroke="#ffffff"
-                  strokeWidth="0.8"
-                />
-                <path
-                  d={generateWavePath(phase, true)}
-                  fill="none"
-                  stroke="#ffffff"
-                  strokeWidth="0.8"
-                />
-              </React.Fragment>
-            ))}
-          </pattern>
-
-          {/* Vertical Guilloché Mask Pattern */}
-          <pattern
-            id={patternVId}
-            width="16"
-            height="24"
-            patternUnits="userSpaceOnUse"
-          >
-            <rect width="16" height="24" fill="#000000" />
-            <line x1="0.5" y1="0" x2="0.5" y2="24" stroke="#ffffff" strokeWidth="0.8" />
-            <line x1="15.5" y1="0" x2="15.5" y2="24" stroke="#ffffff" strokeWidth="0.8" />
-
-            {phases.map((phase) => (
-              <React.Fragment key={`v_${phase}`}>
-                <path
-                  d={generateVerticalWavePath(phase, false)}
-                  fill="none"
-                  stroke="#ffffff"
-                  strokeWidth="0.8"
-                />
-                <path
-                  d={generateVerticalWavePath(phase, true)}
-                  fill="none"
-                  stroke="#ffffff"
-                  strokeWidth="0.8"
-                />
-              </React.Fragment>
-            ))}
-          </pattern>
-
-          {/* Masks using the Guilloché Patterns */}
-          <mask id={maskTopId} maskUnits="objectBoundingBox">
-            <rect x="0" y="0" width="100%" height="100%" fill={`url(#${patternHId})`} />
-          </mask>
-          <mask id={maskBottomId} maskUnits="objectBoundingBox">
-            <rect x="0" y="0" width="100%" height="100%" fill={`url(#${patternHId})`} />
-          </mask>
-          <mask id={maskLeftId} maskUnits="objectBoundingBox">
-            <rect x="0" y="0" width="100%" height="100%" fill={`url(#${patternVId})`} />
-          </mask>
-          <mask id={maskRightId} maskUnits="objectBoundingBox">
-            <rect x="0" y="0" width="100%" height="100%" fill={`url(#${patternVId})`} />
-          </mask>
-        </defs>
-      </svg>
-
       {/* ========================================================
           OUTER SECURITY GUILLOCHÉ BORDER FRAME (16px thickness)
           ======================================================== */}
-      {/* Top Border Bar */}
-      <div className="absolute top-0 left-[14px] sm:left-[16px] right-[14px] sm:right-[16px] h-[14px] sm:h-[16px] pointer-events-none overflow-hidden select-none z-10 print:h-[16px] print:left-[16px] print:right-[16px]">
-        <svg className="w-full h-full block" preserveAspectRatio="none">
-          <rect
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            fill={`url(#${gradHId})`}
-            mask={`url(#${maskTopId})`}
-          />
-        </svg>
-      </div>
+      {/* Top Border Bar (Emerald Green to Azure Blue Gradient) */}
+      <div
+        className="absolute top-0 left-[16px] right-[16px] h-[16px] pointer-events-none select-none z-10"
+        style={{
+          background: 'linear-gradient(to right, #10b981 0%, #059669 20%, #06b6d4 50%, #0ea5e9 80%, #0284c7 100%)',
+          WebkitMaskImage: `url("${dataUriH}")`,
+          maskImage: `url("${dataUriH}")`,
+          WebkitMaskRepeat: 'repeat-x',
+          maskRepeat: 'repeat-x',
+          WebkitMaskSize: '24px 16px',
+          maskSize: '24px 16px',
+        }}
+      />
 
-      {/* Bottom Border Bar */}
-      <div className="absolute bottom-0 left-[14px] sm:left-[16px] right-[14px] sm:right-[16px] h-[14px] sm:h-[16px] pointer-events-none overflow-hidden select-none z-10 print:h-[16px] print:left-[16px] print:right-[16px]">
-        <svg className="w-full h-full block" preserveAspectRatio="none">
-          <rect
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            fill={`url(#${gradHId})`}
-            mask={`url(#${maskBottomId})`}
-          />
-        </svg>
-      </div>
+      {/* Bottom Border Bar (Emerald Green to Azure Blue Gradient) */}
+      <div
+        className="absolute bottom-0 left-[16px] right-[16px] h-[16px] pointer-events-none select-none z-10"
+        style={{
+          background: 'linear-gradient(to right, #10b981 0%, #059669 20%, #06b6d4 50%, #0ea5e9 80%, #0284c7 100%)',
+          WebkitMaskImage: `url("${dataUriH}")`,
+          maskImage: `url("${dataUriH}")`,
+          WebkitMaskRepeat: 'repeat-x',
+          maskRepeat: 'repeat-x',
+          WebkitMaskSize: '24px 16px',
+          maskSize: '24px 16px',
+        }}
+      />
 
       {/* Left Border Bar (Emerald Green) */}
-      <div className="absolute top-[14px] sm:top-[16px] bottom-[14px] sm:bottom-[16px] left-0 w-[14px] sm:w-[16px] pointer-events-none overflow-hidden select-none z-10 print:w-[16px] print:top-[16px] print:bottom-[16px]">
-        <svg className="w-full h-full block" preserveAspectRatio="none">
-          <rect
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            fill="#10b981"
-            mask={`url(#${maskLeftId})`}
-          />
-        </svg>
-      </div>
+      <div
+        className="absolute top-[16px] bottom-[16px] left-0 w-[16px] pointer-events-none select-none z-10"
+        style={{
+          backgroundColor: '#10b981',
+          WebkitMaskImage: `url("${dataUriV}")`,
+          maskImage: `url("${dataUriV}")`,
+          WebkitMaskRepeat: 'repeat-y',
+          maskRepeat: 'repeat-y',
+          WebkitMaskSize: '16px 24px',
+          maskSize: '16px 24px',
+        }}
+      />
 
-      {/* Right Border Bar (Azure Blue / Cyan) */}
-      <div className="absolute top-[14px] sm:top-[16px] bottom-[14px] sm:bottom-[16px] right-0 w-[14px] sm:w-[16px] pointer-events-none overflow-hidden select-none z-10 print:w-[16px] print:top-[16px] print:bottom-[16px]">
-        <svg className="w-full h-full block" preserveAspectRatio="none">
-          <rect
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            fill="#0284c7"
-            mask={`url(#${maskRightId})`}
-          />
-        </svg>
-      </div>
+      {/* Right Border Bar (Azure Blue) */}
+      <div
+        className="absolute top-[16px] bottom-[16px] right-0 w-[16px] pointer-events-none select-none z-10"
+        style={{
+          backgroundColor: '#0284c7',
+          WebkitMaskImage: `url("${dataUriV}")`,
+          maskImage: `url("${dataUriV}")`,
+          WebkitMaskRepeat: 'repeat-y',
+          maskRepeat: 'repeat-y',
+          WebkitMaskSize: '16px 24px',
+          maskSize: '16px 24px',
+        }}
+      />
 
       {/* ========================================================
-          4 MITERED CORNER ROSETTES
+          4 MITERED CORNER ROSETTES (16px x 16px)
           ======================================================== */}
       {/* Top-Left Corner (Emerald Green) */}
-      <div className="absolute top-0 left-0 w-[14px] sm:w-[16px] h-[14px] sm:h-[16px] pointer-events-none overflow-hidden z-10 print:w-[16px] print:h-[16px]">
+      <div className="absolute top-0 left-0 w-[16px] h-[16px] pointer-events-none overflow-hidden z-10">
         <svg className="w-full h-full block" viewBox="0 0 16 16">
           <rect width="16" height="16" fill="#10b981" />
           <line x1="0.5" y1="0.5" x2="15.5" y2="0.5" stroke="#ffffff" strokeWidth="0.8" />
@@ -255,7 +158,7 @@ export const GuillocheCertificateBorder: React.FC<GuillocheCertificateBorderProp
       </div>
 
       {/* Top-Right Corner (Azure Blue / Cyan) */}
-      <div className="absolute top-0 right-0 w-[14px] sm:w-[16px] h-[14px] sm:h-[16px] pointer-events-none overflow-hidden z-10 print:w-[16px] print:h-[16px]">
+      <div className="absolute top-0 right-0 w-[16px] h-[16px] pointer-events-none overflow-hidden z-10">
         <svg className="w-full h-full block" viewBox="0 0 16 16">
           <rect width="16" height="16" fill="#0284c7" />
           <line x1="0.5" y1="0.5" x2="15.5" y2="0.5" stroke="#ffffff" strokeWidth="0.8" />
@@ -272,7 +175,7 @@ export const GuillocheCertificateBorder: React.FC<GuillocheCertificateBorderProp
       </div>
 
       {/* Bottom-Left Corner (Emerald Green) */}
-      <div className="absolute bottom-0 left-0 w-[14px] sm:w-[16px] h-[14px] sm:h-[16px] pointer-events-none overflow-hidden z-10 print:w-[16px] print:h-[16px]">
+      <div className="absolute bottom-0 left-0 w-[16px] h-[16px] pointer-events-none overflow-hidden z-10">
         <svg className="w-full h-full block" viewBox="0 0 16 16">
           <rect width="16" height="16" fill="#10b981" />
           <line x1="0.5" y1="15.5" x2="15.5" y2="15.5" stroke="#ffffff" strokeWidth="0.8" />
@@ -289,7 +192,7 @@ export const GuillocheCertificateBorder: React.FC<GuillocheCertificateBorderProp
       </div>
 
       {/* Bottom-Right Corner (Azure Blue / Cyan) */}
-      <div className="absolute bottom-0 right-0 w-[14px] sm:w-[16px] h-[14px] sm:h-[16px] pointer-events-none overflow-hidden z-10 print:w-[16px] print:h-[16px]">
+      <div className="absolute bottom-0 right-0 w-[16px] h-[16px] pointer-events-none overflow-hidden z-10">
         <svg className="w-full h-full block" viewBox="0 0 16 16">
           <rect width="16" height="16" fill="#0284c7" />
           <line x1="0.5" y1="15.5" x2="15.5" y2="15.5" stroke="#ffffff" strokeWidth="0.8" />
@@ -306,38 +209,19 @@ export const GuillocheCertificateBorder: React.FC<GuillocheCertificateBorderProp
       </div>
 
       {/* ========================================================
-          INNER BORDER LINE (1.5px gradient stroke)
-          16px border + 6px gap = 22px on desktop / 19px on mobile
+          INNER BORDER LINE (1.5px gradient stroke inset by 22px)
+          16px border + 6px gap = 22px
           ======================================================== */}
       <div
-        className="absolute inset-[18px] sm:inset-[22px] pointer-events-none z-10 rounded-[1px] print:inset-[22px]"
+        className="absolute inset-[22px] pointer-events-none z-10 rounded-[1px]"
         style={{
           border: '1.5px solid transparent',
           borderImage: 'linear-gradient(135deg, #10b981 0%, #059669 20%, #06b6d4 60%, #0ea5e9 85%, #0284c7 100%) 1',
         }}
       />
 
-      {/* ========================================================
-          FAINT SECURITY WATERMARK WAVES (Background Texture)
-          ======================================================== */}
-      {showWatermark && (
-        <div className="absolute inset-[20px] sm:inset-[24px] pointer-events-none overflow-hidden opacity-[0.032] select-none z-0">
-          <svg className="w-full h-full block" preserveAspectRatio="none" viewBox="0 0 800 1100">
-            {[60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900, 960, 1020].map((yBase, idx) => (
-              <path
-                key={`watermark_${idx}`}
-                d={`M 0 ${yBase} C 200 ${yBase - 35 + (idx % 3) * 15} 400 ${yBase + 35 - (idx % 2) * 20} 600 ${yBase - 25} T 800 ${yBase}`}
-                fill="none"
-                stroke={idx % 2 === 0 ? '#0284c7' : '#059669'}
-                strokeWidth="1.2"
-              />
-            ))}
-          </svg>
-        </div>
-      )}
-
-      {/* Content wrapper with appropriate inner padding */}
-      <div className="relative z-1 p-4 sm:p-7 md:p-9 print:p-6">
+      {/* Content wrapper with clean inner padding */}
+      <div className="relative z-1 p-6 sm:p-10 md:p-12 print:p-8">
         {children}
       </div>
     </div>
