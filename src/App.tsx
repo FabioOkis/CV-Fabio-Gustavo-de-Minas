@@ -162,7 +162,7 @@ export default function App() {
 
       {/* Modals */}
       <CoverLetterModal
-        isOpen={coverLetterOpen}
+        isOpen={coverLetterOpen && !viewerModal.isOpen}
         onClose={() => setCoverLetterOpen(false)}
         attachment={attachments['carta_apresentacao']}
         onOpenAttach={() =>
@@ -174,7 +174,7 @@ export default function App() {
       />
 
       <RecommendationLetterModal
-        isOpen={recommendationLetterOpen}
+        isOpen={recommendationLetterOpen && !viewerModal.isOpen}
         onClose={() => setRecommendationLetterOpen(false)}
         pnaAttachment={attachments['carta_recomendacao_pna']}
         netcenterAttachment={attachments['carta_recomendacao_netcenter']}
