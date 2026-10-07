@@ -269,10 +269,10 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
                     <span>Carta de Recomendação Oficial</span>
                   </button>
                 )}
-                {attachments['carta_recomendacao'] && (
+                {attachments['carta_recomendacao_pna'] && (
                   <button
                     type="button"
-                    onClick={() => onOpenView(attachments['carta_recomendacao'])}
+                    onClick={() => onOpenView(attachments['carta_recomendacao_pna'])}
                     className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-[11.5px] font-medium transition-all cursor-pointer shadow-2xs"
                     title="Visualizar documento assinado anexado"
                   >

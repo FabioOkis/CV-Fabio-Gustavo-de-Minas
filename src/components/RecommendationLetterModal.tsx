@@ -5,7 +5,8 @@ import { AttachmentItem } from '../utils/attachmentStorage';
 interface RecommendationLetterModalProps {
   isOpen: boolean;
   onClose: () => void;
-  attachment?: AttachmentItem;
+  pnaAttachment?: AttachmentItem;
+  netcenterAttachment?: AttachmentItem;
   isAdmin?: boolean;
   onOpenAttach: () => void;
   onOpenViewAttachment?: (attachment: AttachmentItem) => void;
@@ -15,7 +16,8 @@ interface RecommendationLetterModalProps {
 export const RecommendationLetterModal: React.FC<RecommendationLetterModalProps> = ({
   isOpen,
   onClose,
-  attachment,
+  pnaAttachment,
+  netcenterAttachment,
   isAdmin = false,
   onOpenAttach,
   onOpenViewAttachment,
@@ -134,36 +136,6 @@ Pinheiro Neto Advogados · São Paulo, SP`;
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">
-            {/* Action buttons */}
-            <button
-              type="button"
-              onClick={handleCopy}
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition-colors"
-              title="Copiar texto da carta"
-            >
-              {copied ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="text-emerald-700 font-semibold">Copiado</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5 text-slate-600" />
-                  <span className="hidden sm:inline">Copiar</span>
-                </>
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={handlePrint}
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-medium transition-colors"
-              title="Imprimir Carta de Recomendação"
-            >
-              <Printer className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Imprimir</span>
-            </button>
-
             <button
               onClick={onClose}
               className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-200 transition-colors ml-1"
@@ -174,128 +146,63 @@ Pinheiro Neto Advogados · São Paulo, SP`;
           </div>
         </div>
 
-        {/* Link / Notice to Attachments */}
-        <div className="px-5 sm:px-6 py-2.5 bg-gradient-to-r from-blue-50/95 via-indigo-50/70 to-slate-50 border-b border-blue-200/80 flex flex-wrap items-center justify-between gap-2.5 text-xs text-slate-800 shrink-0 shadow-2xs">
-          <div className="flex items-center gap-2 min-w-0">
-            <div className="w-6 h-6 rounded-md bg-blue-600/10 border border-blue-500/20 text-blue-700 flex items-center justify-center shrink-0">
-              <Paperclip className="w-3.5 h-3.5" />
-            </div>
-            {attachment ? (
-              <span className="truncate">
-                <strong className="text-slate-900 font-bold">Documento original anexado:</strong>{' '}
-                <span className="font-medium text-slate-700">{attachment.fileName}</span>{' '}
-                <span className="text-[11px] text-slate-500 font-mono">({attachment.fileSize || 'PDF'})</span>
-              </span>
-            ) : (
-              <span>
-                <strong className="text-slate-900 font-bold">Documentos &amp; Anexos:</strong> Você pode visualizar ou anexar o PDF assinado da carta.
-              </span>
-            )}
-          </div>
-
-          <div className="flex items-center gap-2 shrink-0">
-            {attachment && onOpenViewAttachment && (
-              <button
-                type="button"
-                onClick={() => {
-                  onClose();
-                  onOpenViewAttachment(attachment);
-                }}
-                className="group relative inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-500 hover:via-blue-600 hover:to-indigo-600 text-white font-semibold text-[11.5px] shadow-sm shadow-blue-500/30 hover:shadow-md hover:shadow-blue-500/40 border border-blue-400/30 transition-all duration-200 cursor-pointer active:scale-95"
-              >
-                <Eye className="w-3.5 h-3.5 text-blue-200 group-hover:text-white transition-colors" />
-                <span className="tracking-tight">Ver Arquivo Anexo</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={() => {
-                onClose();
-                onOpenAttachmentsDrawer();
-              }}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/90 hover:bg-white text-slate-700 hover:text-blue-700 border border-slate-300/80 hover:border-blue-300 font-medium text-[11.5px] transition-all cursor-pointer shadow-2xs"
-            >
-              <span>Central de Anexos</span>
-              <ExternalLink className="w-3.5 h-3.5 text-slate-400 hover:text-blue-600" />
-            </button>
-          </div>
-        </div>
-
-        {/* Letter Body */}
+        {/* Action List */}
         <div className="p-6 sm:p-8 overflow-y-auto space-y-4 text-slate-800 text-[13.5px] sm:text-[14px] leading-relaxed flex-1 font-sans">
-          <div className="border-b border-slate-700 pb-3 mb-5 flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <span className="text-[11.5px] font-bold text-slate-500 uppercase tracking-wider block">
-                Recomendação Corporativa &amp; Técnica
-              </span>
-              <h1 className="text-lg sm:text-xl font-bold text-slate-900 uppercase">
-                PINHEIRO NETO ADVOGADOS
-              </h1>
-              <p className="text-xs text-slate-600">
-                Departamento de Tecnologia da Informação &amp; Service Desk • São Paulo, SP
-              </p>
+          <p className="mb-4 text-slate-600">
+            Selecione uma das cartas de recomendação abaixo para visualizar o documento original em formato PDF.
+          </p>
+          
+          <div className="flex flex-col gap-3">
+            {/* PNA Letter */}
+            <div className="flex items-center justify-between p-4 border border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50/50 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+                  <Award className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900">Pinheiro Neto Advogados</h4>
+                  <p className="text-xs text-slate-500">Carta de Recomendação • PDF</p>
+                </div>
+              </div>
+              {pnaAttachment && onOpenViewAttachment && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onOpenViewAttachment(pnaAttachment);
+                  }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors"
+                >
+                  <Eye className="w-4 h-4" />
+                  Visualizar PDF
+                </button>
+              )}
             </div>
-            <div className="text-right">
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-semibold">
-                <FileCheck className="w-3.5 h-3.5" /> Recomendação Verificada
-              </span>
-            </div>
-          </div>
 
-          <p className="font-semibold text-slate-900">
-            A quem possa interessar,
-          </p>
-
-          <p className="text-justify">
-            É com grande satisfação que emitimos esta Carta de Recomendação em favor de <strong>FÁBIO GUSTAVO DE MINAS</strong>, que integrou nossa equipe de Tecnologia da Informação como <strong>Analista de Suporte Pleno</strong> no período de <strong>Agosto de 2018 a Outubro de 2025</strong> — totalizando mais de 7 anos de dedicação contínua e irretocável.
-          </p>
-
-          <p className="text-justify">
-            Durante sua trajetória em nosso escritório, Fábio desempenhou papel fundamental no suporte técnico de segundo nível, prestando <strong>atendimento VIP e consultivo diretamente a Sócios, Conselheiros e Diretores</strong>, bem como administrando infraestruturas de TI que sustentam a rotina de mais de 1.500 integrantes em ambiente de alta criticidade e confidencialidade.
-          </p>
-
-          <p className="font-semibold text-slate-900 pt-1">
-            Destacamos os seguintes pilares de sua atuação:
-          </p>
-
-          <ul className="list-disc list-outside pl-5 space-y-2 text-justify">
-            <li>
-              <strong>Atendimento Executivo e Confidencialidade:</strong> Discrição impecável no manuseio de dados jurídicos sensíveis, postura respeitosa e capacidade de atender usuários de alto escalão com serenidade e rapidez sob forte pressão.
-            </li>
-            <li>
-              <strong>Domínio Tecnológico e Resolução de Problemas:</strong> Sólido conhecimento prático em Microsoft 365, Active Directory, Entra ID (Azure AD), Microsoft Intune (MDM de dispositivos corporativos móveis), além da ferramenta jurídica iManage.
-            </li>
-            <li>
-              <strong>Proatividade e Confiabilidade:</strong> Iniciativa frequente no desenvolvimento de scripts em PowerShell e rotinas preventivas que reduziram a reincidência de tickets repetitivos, mantendo os índices de SLA acima de 98%.
-            </li>
-            <li>
-              <strong>Ética e Relacionamento Interpessoal:</strong> Trabalho em equipe colaborativo, pontualidade, disciplina e comprometimento constante com a satisfação do cliente interno.
-            </li>
-          </ul>
-
-          <p className="text-justify pt-2">
-            Por todas as suas qualificações técnicas e virtudes comportamentais, <strong>recomendamos Fábio Gustavo de Minas com a máxima segurança</strong> para integrar qualquer equipe que demande um profissional maduro, confiável e com sólida bagagem em suporte de alta exigência.
-          </p>
-
-          <p className="text-justify">
-            Permanecemos à disposição para quaisquer informações complementares.
-          </p>
-
-          <div className="pt-4 border-t border-slate-200 mt-6 flex flex-wrap justify-between items-end gap-4">
-            <div>
-              <p className="text-slate-600 text-xs">Atenciosamente,</p>
-              <p className="font-bold text-slate-900 text-sm mt-1">Coordenação de TI &amp; Service Desk</p>
-              <p className="text-xs text-slate-600">Pinheiro Neto Advogados</p>
-              <p className="text-xs text-slate-500">São Paulo, SP</p>
-            </div>
-            <div className="text-right">
-              <span className="text-[11px] text-slate-500 italic block">
-                Atuação: Ago/2018 – Out/2025
-              </span>
-              <span className="text-[11px] text-blue-700 font-medium">
-                Referência Profissional Comprovada
-              </span>
+            {/* NetCenter Letter */}
+            <div className="flex items-center justify-between p-4 border border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50/50 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+                  <Award className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900">NetCenter</h4>
+                  <p className="text-xs text-slate-500">Carta de Referência • PDF</p>
+                </div>
+              </div>
+              {netcenterAttachment && onOpenViewAttachment && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onOpenViewAttachment(netcenterAttachment);
+                  }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors"
+                >
+                  <Eye className="w-4 h-4" />
+                  Visualizar PDF
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -303,20 +210,6 @@ Pinheiro Neto Advogados · São Paulo, SP`;
         {/* Footer actions with links to attachments */}
         <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-3.5 border-t border-slate-200 bg-slate-50 shrink-0">
           <div className="flex items-center gap-2">
-            {isAdmin && (
-              <button
-                type="button"
-                onClick={() => {
-                  onClose();
-                  onOpenAttach();
-                }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-blue-50 text-blue-700 border border-blue-300 text-xs font-semibold transition-colors cursor-pointer"
-              >
-                <Upload className="w-3.5 h-3.5" />
-                <span>{attachment ? 'Substituir Documento (PDF/Scan)' : 'Anexar Documento Assinado (PDF/Scan)'}</span>
-              </button>
-            )}
-
             <button
               type="button"
               onClick={() => {

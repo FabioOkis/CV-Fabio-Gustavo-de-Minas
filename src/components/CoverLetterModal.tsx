@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Printer, Copy, Check, Paperclip, Upload, FileText, Download } from 'lucide-react';
+import { X, Printer, Copy, Check, Paperclip, Upload, FileText, Download, Eye } from 'lucide-react';
 import { AttachmentItem } from '../utils/attachmentStorage';
 
 interface CoverLetterModalProps {

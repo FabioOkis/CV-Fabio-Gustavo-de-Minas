@@ -153,6 +153,28 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
+  carta_recomendacao_pna: {
+    id: 'carta_recomendacao_pna',
+    category: 'carta',
+    targetTitle: 'Carta de Recomendação — Pinheiro Neto Advogados',
+    fileName: 'Carta de referencia PNA.pdf',
+    fileType: 'pdf',
+    fileSize: '26 KB',
+    dataUrl: 'documentos/Cartas de referencia/Carta de referencia PNA.pdf',
+    uploadedAt: 'Original anexado',
+    isDefault: true,
+  },
+  carta_recomendacao_netcenter: {
+    id: 'carta_recomendacao_netcenter',
+    category: 'carta',
+    targetTitle: 'Carta de Recomendação — NetCenter',
+    fileName: 'Carta de referencia NetCenter.pdf',
+    fileType: 'pdf',
+    fileSize: '655 KB',
+    dataUrl: 'documentos/Cartas de referencia/Carta de referencia NetCenter.pdf',
+    uploadedAt: 'Original anexado',
+    isDefault: true,
+  },
 };
 
 export function loadAttachments(): Record<string, AttachmentItem> {

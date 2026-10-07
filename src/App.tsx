@@ -176,7 +176,8 @@ export default function App() {
       <RecommendationLetterModal
         isOpen={recommendationLetterOpen}
         onClose={() => setRecommendationLetterOpen(false)}
-        attachment={attachments['carta_recomendacao']}
+        pnaAttachment={attachments['carta_recomendacao_pna']}
+        netcenterAttachment={attachments['carta_recomendacao_netcenter']}
         onOpenAttach={() =>
           handleOpenAttach(
             'carta_recomendacao',
