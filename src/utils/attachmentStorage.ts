@@ -10,7 +10,7 @@ export interface AttachmentItem {
   isDefault?: boolean;
 }
 
-const STORAGE_KEY = 'fabio_cv_attachments_v5';
+const STORAGE_KEY = 'fabio_cv_attachments_v6';
 
 // ─── PIN de administrador ────────────────────────────────────────────────────
 // Mude este valor para definir seu PIN pessoal de acesso.
@@ -157,10 +157,10 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     id: 'carta_recomendacao_pna',
     category: 'carta',
     targetTitle: 'Carta de Recomendação — Pinheiro Neto Advogados',
-    fileName: 'Carta de referencia PNA.pdf',
+    fileName: 'carta-de-referencia-pna.pdf',
     fileType: 'pdf',
     fileSize: '26 KB',
-    dataUrl: 'documentos/Cartas de referencia/Carta de referencia PNA.pdf',
+    dataUrl: 'documentos/cartas-de-referencia/carta-de-referencia-pna.pdf',
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
@@ -168,10 +168,10 @@ export const DEFAULT_ATTACHMENTS: Record<string, AttachmentItem> = {
     id: 'carta_recomendacao_netcenter',
     category: 'carta',
     targetTitle: 'Carta de Recomendação — NetCenter',
-    fileName: 'Carta de referencia NetCenter.pdf',
+    fileName: 'carta-de-referencia-netcenter.pdf',
     fileType: 'pdf',
     fileSize: '655 KB',
-    dataUrl: 'documentos/Cartas de referencia/Carta de referencia NetCenter.pdf',
+    dataUrl: 'documentos/cartas-de-referencia/carta-de-referencia-netcenter.pdf',
     uploadedAt: 'Original anexado',
     isDefault: true,
   },
