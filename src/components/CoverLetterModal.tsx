@@ -185,7 +185,6 @@ São Paulo, SP`;
               <button
                 type="button"
                 onClick={() => {
-                  onClose();
                   onOpenViewAttachment(attachment);
                 }}
                 className="group relative inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-500 hover:via-teal-500 hover:to-emerald-600 text-white font-semibold text-[11.5px] shadow-sm shadow-emerald-500/30 hover:shadow-md hover:shadow-emerald-500/40 border border-emerald-400/30 transition-all duration-200 cursor-pointer active:scale-95"
