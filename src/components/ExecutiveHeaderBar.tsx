@@ -73,7 +73,7 @@ COMPETÊNCIAS COMPORTAMENTAIS
 • Organização, disciplina e produção de documentação técnica
 
 EXPERIÊNCIA PROFISSIONAL
-Consultor de Suporte II (Jan/2026 – Atual)
+Consultor de Suporte II (Jan/2026 – Set/2026)
 Netcenter — alocado em Pinheiro Guimarães Advogados · São Paulo, SP
 • Responsável pelo suporte de segundo nível e administração de TI no escritório Pinheiro Guimarães Advogados.
 • Administração de usuários, acessos, grupos e políticas de segurança no Active Directory e no ecossistema Microsoft 365.

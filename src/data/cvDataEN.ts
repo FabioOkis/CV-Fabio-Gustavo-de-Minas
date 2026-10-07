@@ -5,7 +5,7 @@ export const CV_DATA_EN = {
   contact: {
     ...CV_DATA.contact,
     role: 'IT Support Analyst — Executive & VIP Support for High-Demand Environments',
-    status: 'Active · IT Support Consultant',
+    status: 'Available for new opportunities',
     experienceYears: '19+ years',
   },
   summary:
@@ -41,8 +41,8 @@ export const CV_DATA_EN = {
       id: 'job-netcenter-pg',
       company: 'Netcenter — allocated at Pinheiro Guimarães Advogados · São Paulo, Brazil',
       role: 'IT Support Consultant II',
-      period: 'Jan/2026 – Present',
-      current: true,
+      period: 'Jan/2026 – Sep/2026 (9 mos)',
+      current: false,
       highlights: [
         'Responsible for L2 technical support and IT administration at Pinheiro Guimarães Advogados.',
         'Administration of users, permissions, groups, and security policies in Active Directory and Microsoft 365 (SharePoint, Teams, OneDrive, Exchange).',

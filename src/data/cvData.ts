@@ -23,7 +23,7 @@ export const CV_DATA: {
   contact: {
     name: 'FÁBIO GUSTAVO DE MINAS',
     role: 'Analista de Suporte PL — Suporte VIP, Executivo & Ambientes Corporativos de Alta Exigência',
-    status: 'Em atividade · Consultor de Suporte',
+    status: 'Buscando novas oportunidades',
     location: 'São Paulo, SP',
     experienceYears: '19+ anos',
     uptimeStartYear: 2007,
@@ -66,8 +66,8 @@ export const CV_DATA: {
       id: 'job-netcenter-pg',
       company: 'Netcenter — alocado em Pinheiro Guimarães Advogados · São Paulo, SP',
       role: 'Consultor de Suporte II',
-      period: 'Jan/2026 – Atual',
-      current: true,
+      period: 'Jan/2026 – Set/2026 (9 meses)',
+      current: false,
       highlights: [
         'Responsável pelo suporte de segundo nível e administração de TI no escritório Pinheiro Guimarães Advogados.',
         'Administração de usuários, acessos, grupos e políticas de segurança no Active Directory e no ecossistema Microsoft 365 (SharePoint, Teams, OneDrive e Exchange).',

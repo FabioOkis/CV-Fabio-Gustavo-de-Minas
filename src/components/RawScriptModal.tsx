@@ -75,7 +75,7 @@ echo -e "  • Organização, disciplina e produção de documentação técnica
 echo ""
 
 echo -e "\${YELLOW}\${BOLD}fabio@infra:~$ tail -f experiencia.log\${RESET}"
-echo -e "  \${GREEN}[Jan/2026 – Atual]\${RESET} \${WHITE}\${BOLD}Netcenter — alocado em Pinheiro Guimarães Advogados · São Paulo, SP\${RESET}"
+echo -e "  \${GREEN}[Jan/2026 – Set/2026 (9 meses)]\${RESET} \${WHITE}\${BOLD}Netcenter — alocado em Pinheiro Guimarães Advogados · São Paulo, SP\${RESET}"
 echo -e "  \${CYAN}  Cargo: Consultor de Suporte II\${RESET}"
 echo -e "  \${GRAY}  • Responsável pelo suporte de segundo nível e administração de TI no escritório Pinheiro Guimarães Advogados.\${RESET}"
 echo -e "  \${GRAY}  • Administração de usuários, acessos, grupos e políticas de segurança no Active Directory e no ecossistema Microsoft 365 (SharePoint, Teams, OneDrive e Exchange).\${RESET}"
