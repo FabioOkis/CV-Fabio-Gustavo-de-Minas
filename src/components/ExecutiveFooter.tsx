@@ -244,7 +244,7 @@ export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
               © {currentYear} Fábio Gustavo de Minas
             </p>
             <p className="text-[11px] text-slate-400 mt-0.5">
-              Analista de Suporte PL — Suporte VIP &amp; Alta Exigência
+              Tecnologia da Informação | Infraestrutura | Governança de TI | ITSM | Microsoft 365 | PowerShell | Gestão de Serviços
             </p>
           </div>
 

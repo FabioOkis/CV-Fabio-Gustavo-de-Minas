@@ -132,8 +132,8 @@ IDIOMAS
                 Currículo Executivo
               </span>
             </h1>
-            <p className="text-[10.5px] sm:text-[11px] text-slate-400 truncate hidden lg:block">
-              Analista de Suporte PL — Suporte VIP &amp; Alta Exigência
+            <p className="text-[10.5px] sm:text-[11px] text-slate-400 truncate hidden xl:block max-w-[300px]" title="Tecnologia da Informação | Infraestrutura | Governança de TI | ITSM | Microsoft 365 | PowerShell | Gestão de Serviços">
+              Tecnologia da Informação | Infraestrutura | Governança de TI | ITSM | Microsoft 365 | PowerShell | Gestão de Serviços
             </p>
           </div>
         </div>
