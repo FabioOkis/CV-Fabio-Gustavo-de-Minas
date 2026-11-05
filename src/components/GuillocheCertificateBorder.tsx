@@ -73,7 +73,7 @@ export const GuillocheCertificateBorder: React.FC<GuillocheCertificateBorderProp
 
   return (
     <div
-      className={`relative bg-white text-slate-900 shadow-xl print:shadow-none print:m-0 print:p-0 ${className}`}
+      className={`guilloche-frame relative bg-white text-slate-900 shadow-xl print:shadow-none print:m-0 print:p-0 ${className}`}
       style={{
         boxSizing: 'border-box',
       }}
@@ -221,7 +221,7 @@ export const GuillocheCertificateBorder: React.FC<GuillocheCertificateBorderProp
       />
 
       {/* Content wrapper with clean inner padding */}
-      <div className="relative z-1 p-6 sm:p-10 md:p-12 print:p-8">
+      <div className="relative z-1 p-6 sm:p-10 md:p-12 print:p-0">
         {children}
       </div>
     </div>

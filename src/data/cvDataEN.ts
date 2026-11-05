@@ -9,7 +9,7 @@ export const CV_DATA_EN = {
     experienceYears: '19+ years',
   },
   summary:
-    'IT Analyst with over 19 years of experience in technical support and IT infrastructure for high-criticality and high-confidentiality corporate environments, including major law firms and public sector bodies. Trusted, consultative and discrete support for executive/VIP users (partners, directors, board members), with deep hands-on expertise in Windows, Apple (macOS/iOS), Mobile Device Management via Microsoft Intune & Entra ID (Azure AD), Active Directory, Microsoft 365, Microsoft Defender, PowerShell scripting, and ITIL governance.',
+    'IT Analyst with solid experience in technical support and infrastructure, working in major law firms and public sector bodies. Specialist in supporting executives, directors and strategic users, with professionalism, discretion and a focus on internal customer satisfaction. Proficient in Windows, macOS/iOS, Microsoft 365, Active Directory, Intune and Entra ID, with experience in high-criticality, high-pressure environments with demanding SLAs. Collaborative and proactive, with strong communication skills and willingness to work across different units and demands.',
   skillGroups: [
     {
       title: 'TECHNICAL COMPETENCIES',
@@ -28,11 +28,15 @@ export const CV_DATA_EN = {
     {
       title: 'BEHAVIORAL COMPETENCIES',
       skills: [
-        'Consultative support for high-profile executive users with discretion & confidentiality',
-        'Clear technical communication with users, directors, and stakeholders',
-        'Sense of urgency and effective prioritization under high-pressure environments',
-        'Complex problem solving and root cause analysis',
-        'Organization, discipline, and high-quality technical documentation',
+        'Collaborative and proactive profile',
+        'Accountability and commitment to team results',
+        'Excellent user service',
+        'Ability to stay calm under pressure',
+        'Professional demeanor when supporting executives, directors and strategic users',
+        'Strong communication and interpersonal skills',
+        'Eagerness to learn and share knowledge',
+        'Flexibility to work across different units and company demands',
+        'Focus on internal customer experience and satisfaction',
       ],
     },
   ],
@@ -41,15 +45,15 @@ export const CV_DATA_EN = {
       id: 'job-netcenter-pg',
       company: 'Netcenter — allocated at Pinheiro Guimarães Advogados · São Paulo, Brazil',
       role: 'IT Support Consultant II',
-      period: 'Jan/2026 – Sep/2026 (9 mos)',
-      current: false,
+      period: 'Jan/2026 – Present',
+      current: true,
       highlights: [
         'Responsible for L2 technical support and IT administration at Pinheiro Guimarães Advogados.',
         'Administration of users, permissions, groups, and security policies in Active Directory and Microsoft 365 (SharePoint, Teams, OneDrive, Exchange).',
         'Advanced support and management for iManage Legal Document Management System.',
         'Data Room administration for secure document sharing during audits and M&A transactions.',
         'Monitoring and execution of critical IT routines: backups, asset inventory, and technical guides.',
-        'Hardware, software, network, and print troubleshooting with direct vendor interface.',
+        'Hardware, software, network, and print troubleshooting.',
       ],
     },
     {

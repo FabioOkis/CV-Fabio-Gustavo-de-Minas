@@ -66,14 +66,18 @@ COMPETÊNCIAS TÉCNICAS
 • Gestão de backup, inventário de ativos e documentação técnica
 
 COMPETÊNCIAS COMPORTAMENTAIS
-• Atendimento consultivo a usuários de alto perfil, com discrição e confidencialidade
-• Comunicação técnica clara com usuários e stakeholders
-• Senso de urgência e priorização em ambientes de alta pressão
-• Resolução de problemas complexos e análise de causa raiz
-• Organização, disciplina e produção de documentação técnica
+• Perfil colaborativo e proativo
+• Responsabilidade e comprometimento com os resultados da equipe
+• Excelente atendimento ao usuário
+• Capacidade de atuar com tranquilidade em situações de pressão
+• Boa postura profissional para atendimento a executivos, diretores e usuários estratégicos
+• Facilidade de comunicação e relacionamento interpessoal
+• Vontade de aprender e compartilhar conhecimento
+• Flexibilidade para atuar em diferentes unidades e demandas da companhia
+• Foco na experiência e satisfação do cliente interno
 
 EXPERIÊNCIA PROFISSIONAL
-Consultor de Suporte II (Jan/2026 – Set/2026)
+Consultor de Suporte II (Jan/2026 – Atual)
 Netcenter — alocado em Pinheiro Guimarães Advogados · São Paulo, SP
 • Responsável pelo suporte de segundo nível e administração de TI no escritório Pinheiro Guimarães Advogados.
 • Administração de usuários, acessos, grupos e políticas de segurança no Active Directory e no ecossistema Microsoft 365.
@@ -95,6 +99,7 @@ Grupo Cimcorp — alocado no TRT 2ª Região · São Paulo, SP
 • Suporte a sistemas críticos do tribunal.
 
 FORMAÇÃO ACADÊMICA
+• Tecnologia em Segurança da Informação — UNINOVE · Cursando
 • MBA em Gestão de Pessoas — Ênfase em Liderança e Desenvolvimento de Equipes — UNINOVE · São Paulo, SP · Concluído em Junho/2018
 • Graduação e Pós-Graduação em Redes de Computadores — Especialização em Infraestrutura e Segurança — UNINOVE · São Paulo, SP · Concluído em Agosto/2016
 

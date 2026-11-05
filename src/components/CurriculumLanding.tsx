@@ -49,7 +49,7 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
   ];
   return (
     <GuillocheCertificateBorder
-      className="w-full max-w-[860px] mx-auto sm:rounded-xs print:rounded-none font-sans"
+      className="w-full max-w-[860px] print:max-w-none mx-auto sm:rounded-xs print:rounded-none font-sans"
     >
       <div className="w-full text-slate-900 font-sans">
         {/* ================= HEADER ================= */}
@@ -218,7 +218,7 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
         <hr className="border-t border-slate-300 my-1" />
 
         {cvContent.experiences.map((exp) => (
-          <div key={exp.id} className="mb-3.5">
+          <div key={exp.id} className="mb-3.5 job-item">
             <div className="flex justify-between items-baseline flex-wrap gap-x-2">
               <h3 className="text-[13px] sm:text-[13.5px] font-bold text-slate-900">
                 {exp.role}
@@ -294,6 +294,14 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
         <hr className="border-t border-slate-300 my-1" />
 
         <div className="space-y-3 pt-0.5 text-[12.5px] sm:text-[13px] text-slate-800">
+          {/* Segurança da Informação (em andamento) */}
+          <div className="space-y-1">
+            <p className="leading-snug">
+              <strong className="font-bold text-slate-900">Tecnologia em Segurança da Informação</strong> —{' '}
+              <span className="italic text-slate-700">UNINOVE · Cursando</span>
+            </p>
+          </div>
+
           {/* MBA Item */}
           <div className="space-y-1">
             <p className="leading-snug">

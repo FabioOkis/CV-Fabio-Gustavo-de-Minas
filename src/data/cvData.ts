@@ -34,7 +34,7 @@ export const CV_DATA: {
     github: 'https://github.com/fabiominas',
   },
   summary:
-    'Analista de TI com mais de 19 anos de experiência em suporte técnico e infraestrutura para ambientes corporativos de alta criticidade e confidencialidade, incluindo grandes escritórios de advocacia e órgãos públicos. Atuação consultiva e discreta no atendimento a usuários de alto perfil, com domínio de ecossistema Windows, Apple (macOS/iOS) e gestão de dispositivos móveis via Microsoft Intune e Entra ID (Azure AD), Active Directory, Microsoft 365, Microsoft Defender, PowerShell e governança de TI (ITIL), com histórico de suporte a empresas com mais de 1.100 integrantes e melhoria contínua de SLAs.',
+    'Analista de TI com sólida experiência em suporte técnico e infraestrutura, atuando em grandes escritórios de advocacia e órgãos públicos. Especialista no atendimento a executivos, diretores e usuários estratégicos, com postura profissional, discrição e foco na satisfação do cliente interno. Domínio de Windows, macOS/iOS, Microsoft 365, Active Directory, Intune e Entra ID, com experiência em ambientes de alta criticidade, sob pressão e com SLAs exigentes. Perfil colaborativo e proativo, com facilidade de comunicação e disposição para atuar em diferentes unidades e demandas.',
   skillGroups: [
     {
       title: 'COMPETÊNCIAS TÉCNICAS',
@@ -53,11 +53,15 @@ export const CV_DATA: {
     {
       title: 'COMPETÊNCIAS COMPORTAMENTAIS',
       skills: [
-        'Atendimento consultivo a usuários de alto perfil, com discrição e confidencialidade',
-        'Comunicação técnica clara com usuários e stakeholders',
-        'Senso de urgência e priorização em ambientes de alta pressão',
-        'Resolução de problemas complexos e análise de causa raiz',
-        'Organização, disciplina e produção de documentação técnica',
+        'Perfil colaborativo e proativo',
+        'Responsabilidade e comprometimento com os resultados da equipe',
+        'Excelente atendimento ao usuário',
+        'Capacidade de atuar com tranquilidade em situações de pressão',
+        'Boa postura profissional para atendimento a executivos, diretores e usuários estratégicos',
+        'Facilidade de comunicação e relacionamento interpessoal',
+        'Vontade de aprender e compartilhar conhecimento',
+        'Flexibilidade para atuar em diferentes unidades e demandas da companhia',
+        'Foco na experiência e satisfação do cliente interno',
       ],
     },
   ],
@@ -66,15 +70,15 @@ export const CV_DATA: {
       id: 'job-netcenter-pg',
       company: 'Netcenter — alocado em Pinheiro Guimarães Advogados · São Paulo, SP',
       role: 'Consultor de Suporte II',
-      period: 'Jan/2026 – Set/2026 (9 meses)',
-      current: false,
+      period: 'Jan/2026 – Atual',
+      current: true,
       highlights: [
         'Responsável pelo suporte de segundo nível e administração de TI no escritório Pinheiro Guimarães Advogados.',
         'Administração de usuários, acessos, grupos e políticas de segurança no Active Directory e no ecossistema Microsoft 365 (SharePoint, Teams, OneDrive e Exchange).',
         'Gestão e suporte avançado ao iManage, sistema de gerenciamento de documentos jurídicos, garantindo organização e confidencialidade de peças e processos.',
         'Administração de ambientes de Data Room para compartilhamento seguro de documentos em auditorias e transações financeiras.',
         'Execução e monitoramento de rotinas críticas de TI: políticas de backup, inventário de ativos e documentação técnica para usuários.',
-        'Diagnóstico e resolução de problemas de hardware, software, redes e impressão, com interface direta a fornecedores para demandas complexas.',
+        'Diagnóstico e resolução de problemas de hardware, software, redes e impressão.',
       ],
     },
     {
@@ -103,6 +107,12 @@ export const CV_DATA: {
     },
   ],
   educations: [
+    {
+      degree: 'Tecnologia em Segurança da Informação',
+      field: '',
+      institution: 'UNINOVE · São Paulo, SP',
+      year: 'Cursando',
+    },
     {
       degree: 'MBA em Gestão de Pessoas',
       field: 'Ênfase em Liderança e Desenvolvimento de Equipes',
@@ -174,4 +184,3 @@ export const CV_DATA: {
     },
   },
 };
-

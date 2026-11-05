@@ -87,6 +87,53 @@ body {
     orphans: 2;
     widows: 2;
   }
+
+  /* ---- Correções de layout de impressão ---- */
+
+  /* Remove a moldura decorativa (máscaras SVG/gradientes não imprimem bem e quebram entre páginas) */
+  .guilloche-frame > .absolute {
+    display: none !important;
+  }
+
+  .guilloche-frame {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    background: #ffffff !important;
+  }
+
+  /* Container principal sem paddings/flex de tela */
+  main {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Não imprimir URL completa após links (poluía o texto) */
+  a::after {
+    content: none !important;
+  }
+
+  /* Blocos de cargo: manter juntos; marcadores de lista dentro da margem */
+  .job-item {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  ul {
+    padding-left: 1.1rem !important;
+  }
+
+  h2 {
+    margin-top: 0.4rem !important;
+  }
+
+  p, li {
+    text-align: left !important;
+  }
 }
 
 /* Animations */

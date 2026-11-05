@@ -8,6 +8,7 @@ import { CoverLetterModal } from './components/CoverLetterModal';
 import { RecommendationLetterModal } from './components/RecommendationLetterModal';
 import { AdminPinModal } from './components/AdminPinModal';
 import { ExecutiveFooter } from './components/ExecutiveFooter';
+import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
 import {
   AttachmentItem,
   loadAttachments,
@@ -159,6 +160,8 @@ export default function App() {
         isAdmin={isAdmin}
         onRequestAdmin={handleRequestAdmin}
       />
+
+      <WhatsAppFloatingButton />
 
       {/* Modals */}
       <CoverLetterModal
