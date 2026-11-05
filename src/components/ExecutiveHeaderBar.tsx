@@ -132,9 +132,6 @@ IDIOMAS
                 Currículo Executivo
               </span>
             </h1>
-            <p className="text-[10.5px] sm:text-[11px] text-slate-400 truncate hidden xl:block max-w-[300px]" title="Tecnologia da Informação | Infraestrutura | Governança de TI | ITSM | Microsoft 365 | PowerShell | Gestão de Serviços">
-              Tecnologia da Informação | Infraestrutura | Governança de TI | ITSM | Microsoft 365 | PowerShell | Gestão de Serviços
-            </p>
           </div>
         </div>
 
@@ -252,6 +249,11 @@ IDIOMAS
             )}
           </button>
         </div>
+      </div>
+
+      {/* Áreas de atuação (linha própria, sem cortar texto) */}
+      <div className="hidden md:block border-t border-slate-800/70 py-1 px-4 text-center text-[11px] text-slate-400 tracking-wide">
+        Tecnologia da Informação | Infraestrutura | Governança de TI | ITSM | Microsoft 365 | PowerShell | Gestão de Serviços
       </div>
 
       {/* Mobile Actions Drawer */}
