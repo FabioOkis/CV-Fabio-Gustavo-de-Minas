@@ -49,7 +49,7 @@ export const ExecutiveHeaderBar: React.FC<ExecutiveHeaderBarProps> = ({
   const handleCopyText = () => {
     const fullText = `FÁBIO GUSTAVO DE MINAS
 Analista de Suporte PL — Suporte VIP, Executivo & Ambientes Corporativos de Alta Exigência
-São Paulo, SP | (11) 95423-7500 | fabiominas@outlook.com | linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/
+São Paulo, SP | (11) 95423-7500 | fabiominas@outlook.com | LinkedIn: https://www.linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/ | CV Online: https://fabiookis.github.io/CV-Fabio-Gustavo-de-Minas/
 
 RESUMO PROFISSIONAL
 ${CV_DATA.summary}

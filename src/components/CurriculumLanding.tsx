@@ -85,7 +85,16 @@ export const CurriculumLanding: React.FC<CurriculumLandingProps> = ({
             rel="noopener noreferrer"
             className="hover:text-blue-700 hover:underline text-blue-700 font-medium transition-colors"
           >
-            linkedin.com/in/f%C3%A1bio-minas-fgm-3951629b/
+            LinkedIn
+          </a>
+          <span className="text-slate-400">|</span>
+          <a
+            href="https://fabiookis.github.io/CV-Fabio-Gustavo-de-Minas/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-700 hover:underline text-blue-700 font-medium transition-colors"
+          >
+            CV Online
           </a>
         </address>
 
