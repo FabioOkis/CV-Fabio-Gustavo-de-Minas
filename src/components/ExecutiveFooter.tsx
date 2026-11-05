@@ -142,7 +142,7 @@ export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
   };
 
   return (
-    <footer className="no-print bg-slate-900 text-slate-300 border-t border-slate-800 mt-12 py-10 px-4 sm:px-6 transition-colors">
+    <footer className="no-print bg-slate-900 text-slate-300 border-t border-slate-800 mt-12 pt-10 pb-24 px-4 sm:px-6 transition-colors">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Compliance & Security Badges (ISO 27001 & LGPD) */}
         <div className="bg-slate-950/70 border border-slate-800/90 rounded-2xl p-5 sm:p-6 shadow-xl">
@@ -238,8 +238,8 @@ export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
         </div>
 
         {/* Contact Links & Copyright (No awkward wraps) */}
-        <div className="pt-4 border-t border-slate-800/90 flex flex-col xl:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <div className="text-center xl:text-left shrink-0">
+        <div className="pt-4 border-t border-slate-800/90 flex flex-col 2xl:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <div className="text-center 2xl:text-left shrink-0">
             <p className="font-semibold text-slate-200">
               © {currentYear} Fábio Gustavo de Minas
             </p>
