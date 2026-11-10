@@ -237,9 +237,9 @@ export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
           </button>
         </div>
 
-        {/* Contact Links & Copyright (No awkward wraps) */}
-        <div className="pt-4 border-t border-slate-800/90 flex flex-col 2xl:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <div className="text-center 2xl:text-left shrink-0">
+        {/* Contact Links & Copyright (Always Centered) */}
+        <div className="pt-4 border-t border-slate-800/90 flex flex-col items-center justify-center gap-4 text-xs text-slate-400">
+          <div className="text-center">
             <p className="font-semibold text-slate-200">
               © {currentYear} Fábio Gustavo de Minas
             </p>
@@ -248,7 +248,7 @@ export const ExecutiveFooter: React.FC<ExecutiveFooterProps> = ({
             </p>
           </div>
 
-          <div className="flex flex-wrap lg:flex-nowrap items-center justify-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <a
               href="mailto:fabiominas@outlook.com"
               className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800/60 hover:bg-slate-800 text-slate-300 hover:text-blue-300 transition-colors whitespace-nowrap"
